@@ -6,5 +6,5 @@ Nama: [Cinta bunda feliani]<br>
 NIM: [2611500061]<br>
 Kelompok: [PWD-TI1J]<br>
 Tahun Ajaran: 2026/2027 semester Gasal<br><br>
-! [logoisbal.png}(logoisbal.png)
+!(logoisbal.png)
 
