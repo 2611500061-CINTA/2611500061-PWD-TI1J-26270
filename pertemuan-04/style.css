@@ -164,7 +164,24 @@ nav a {
 
 main {
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr;
 gap: 16px;
 }
 
+@media (min-width: 768px) {
+/* aturan CSS untuk viewport dengan lebar minimal 768px */
+main {
+grid-template-columns: 1fr 1fr;
+}
+}
+
+nav ul {
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+gap: 16px;
+}
+
+#contact {
+grid-column: 1 / -1;
+}
