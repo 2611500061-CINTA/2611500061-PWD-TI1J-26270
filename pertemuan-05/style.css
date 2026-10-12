@@ -1,4 +1,5 @@
 * {
+<<<<<<< HEAD
   box-sizing: border-box;
 }
 
@@ -8,10 +9,30 @@ body {
   font-family: Arial, sans-serif;
   color: #111827;
   background-color: #eef2f7;
+=======
+box-sizing: border-box;
+}
+
+#home {
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    margin: 0;
+}
+
+body {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    color: #111827;
+    background-color: #eef2f7;
+>>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
 }
 
 /* Header */
 header {
+<<<<<<< HEAD
   padding: 20px;
   margin-bottom: 20px;
   color: #ffffff;
@@ -219,10 +240,145 @@ fieldset legend {
 
 .form-feedback-success {
   color: #2e7d32;
+=======
+background-color: #003366;
+color: #ffffff;
+padding: 20px;
+margin-bottom: 20px;
+border: 1px solid #00264d;
+}
+
+header h1 {
+margin: 0 0 16px;
+font-size: 28px;
+}
+
+section {
+width: 100%;
+}
+
+#home h2 {
+color: #003366;
+border-bottom: 2px solid #003366;
+padding-bottom: 6px;
+margin-top: 0;
+margin-bottom: 16px;
+}
+#home p {
+line-height: 1.6;
+margin: 0 0 16px;
+}
+
+#home img {
+    display: block;
+    width: 120px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+}
+
+#about {
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    padding: 12px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#about h2 {
+color: #003366;
+border-bottom: 2px solid #003366;
+padding-bottom: 6px;
+margin-bottom: 16px;
+}
+
+#about h3 {
+color: #1f4e78;
+margin-bottom: 6px;
+}
+
+#about p {
+margin: 6px 0;
+padding: 6px 0;
+border-bottom: 1px solid #e6e6e6;
+}
+
+#about ol {
+color: #333333;
+margin: 8px 0;
+padding: 8px 24px;
+border: 1px solid #e6e6e6;
+}
+
+#contact {
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    grid-column: 1 / -1;
+}
+
+#contact h2 {
+color: #003366;
+border-bottom: 2px solid #003366;
+padding-bottom: 6px;
+margin-bottom: 16px;
+}
+
+.form-group {
+    margin: 8px 0;
+}
+
+.form-group label {
+    display: inline-block;
+}
+
+.form-group > label:first-child {
+    display: block;
+    margin-bottom: 3px;
+}
+
+#contact label {
+color: #1f2937;
+font-weight: bold;
+}
+
+.input-form {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #111827;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 6px;
+    margin: 4px 0;
+    border: 1px solid #94a3b8;
+}
+
+#contact form {
+    width: 100%;
+}
+
+#contact textarea {
+    width: 100%;
+    min-height: 70px;
+    box-sizing: border-box;
+}
+
+#contact button {
+background-color: #003366;
+color: #ffffff;
+font-weight: bold;
+padding: 8px 14px;
+margin: 8px 6px 0 0;
+border: 1px solid #003366;
+>>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
 }
 
 /* Footer */
 footer {
+<<<<<<< HEAD
   padding: 14px 20px;
   margin-top: 20px;
   color: #ffffff;
@@ -242,10 +398,27 @@ footer p {
   }
 
   nav ul {
+=======
+background-color: #003366;
+color: #ffffff;
+text-align: center;
+padding: 14px 20px;
+margin-top: 20px;
+border: 1px solid #00264d;
+}
+
+footer p {
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+>>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
+<<<<<<< HEAD
   }
 
   #navMenu {
@@ -264,4 +437,21 @@ footer p {
   #contact {
     grid-column: 1 / -1;
   }
+=======
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+>>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
 }
