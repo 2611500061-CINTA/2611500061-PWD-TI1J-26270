@@ -1,5 +1,4 @@
 * {
-<<<<<<< HEAD
   box-sizing: border-box;
 }
 
@@ -9,29 +8,10 @@ body {
   font-family: Arial, sans-serif;
   color: #111827;
   background-color: #eef2f7;
-=======
-box-sizing: border-box;
 }
-body {
-<<<<<<< HEAD
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 12px;
-    font-family: Arial, sans-serif;
-    color: #111827;
-    background-color: #eef2f7;
->>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
-=======
-margin: 0;
-padding: 12px;
-font-family: Arial, sans-serif;
-color: #111827;
-background-color: #eef2f7;
->>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
-}
+
 /* Header */
 header {
-<<<<<<< HEAD
   padding: 20px;
   margin-bottom: 20px;
   color: #ffffff;
@@ -107,7 +87,9 @@ section {
   border: 1px solid #d0d7de;
 }
 
-#home h2 {
+#home h2,
+#about h2,
+#contact h2 {
   padding-bottom: 6px;
   margin-top: 0;
   margin-bottom: 16px;
@@ -136,14 +118,6 @@ section {
   border: 1px solid #d0d7de;
 }
 
-#about h2 {
-  padding-bottom: 6px;
-  margin-top: 0;
-  margin-bottom: 16px;
-  color: #003366;
-  border-bottom: 2px solid #003366;
-}
-
 #about h3 {
   margin-bottom: 6px;
   color: #1f4e78;
@@ -169,14 +143,6 @@ section {
   margin: 0;
   background-color: #f8fafc;
   border: 1px solid #cbd5e1;
-}
-
-#contact h2 {
-  padding-bottom: 6px;
-  margin-top: 0;
-  margin-bottom: 16px;
-  color: #003366;
-  border-bottom: 2px solid #003366;
 }
 
 .form-group {
@@ -239,171 +205,10 @@ fieldset legend {
 
 .form-feedback-success {
   color: #2e7d32;
-=======
-background-color: #003366;
-color: #ffffff;
-padding: 20px;
-margin-bottom: 20px;
-border: 1px solid #00264d;
 }
-header h1 {
-margin: 0;
-font-size: 28px;
-}
-.header-top {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-#navMenu {
-display: none;
-}
-#navMenu.nav-open {
-display: flex;
-flex-direction: column;
-margin-top: 16px;
-}
-.nav-toggle {
-display: block;
-border: none;
-background: transparent;
-color: #ffffff;
-font-size: 1.8rem;
-line-height: 1;
-cursor: pointer;
-}
-/* Navigasi */
-nav ul {
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: flex-start;
-gap: 12px;
-margin: 0;
-padding: 0;
-list-style: none;
-}
-nav a {
-color: #ffffff;
-font-weight: bold;
-text-decoration: none;
-}
-/* Layout utama */
-main {
-display: grid;
-grid-template-columns: 1fr;
-gap: 16px;
-}
-section {
-width: 100%;
-}
-/* Bagian Home */
-#home {
-background-color: #ffffff;
-border: 1px solid #d0d7de;
-padding: 20px;
-margin: 0;
-}
-#home h2 {
-color: #003366;
-border-bottom: 2px solid #003366;
-padding-bottom: 6px;
-margin-top: 0;
-margin-bottom: 16px;
-}
-#home p {
-line-height: 1.6;
-margin: 0 0 16px;
-}
-#home img {
-display: block;
-width: 240px;
-max-width: 100%;
-height: auto;
-border: 1px solid #cbd5e1;
-}
-/* Bagian Tentang */
-#about {
-background-color: #ffffff;
-border: 1px solid #d0d7de;
-padding: 20px;
-margin: 0;
-}
-#about h2 {
-color: #003366;
-border-bottom: 2px solid #003366;
-padding-bottom: 6px;
-margin-top: 0;
-margin-bottom: 16px;
-}
-#about h3 {
-color: #1f4e78;
-margin-bottom: 6px;
-}
-#about p {
-margin: 6px 0;
-padding: 6px 0;
-border-bottom: 1px solid #e6e6e6;
-line-height: 1.5;
-}
-#about ol {
-color: #333333;
-margin: 8px 0;
-padding: 8px 24px;
-border: 1px solid #e6e6e6;
-}
-/* Bagian Kontak */
-#contact {
-background-color: #f8fafc;
-border: 1px solid #cbd5e1;
-padding: 20px;
-margin: 0;
-}
-#contact h2 {
-color: #003366;
-border-bottom: 2px solid #003366;
-padding-bottom: 6px;
-margin-top: 0;
-margin-bottom: 16px;
-}
-.form-group {
-margin: 12px 0;
-}
-#contact label {
-color: #1f2937;
-font-weight: bold;
-}
-.input-form {
-width: 100%;
-max-width: 100%;
-background-color: #ffffff;
-color: #111827;
-font-family: Arial, sans-serif;
-font-size: 16px;
-padding: 8px;
-margin: 4px 0;
-border: 1px solid #94a3b8;
-}
-#contact textarea {
-min-height: 80px;
-resize: vertical;
-}
-#contact button {
-background-color: #003366;
-color: #ffffff;
-font-weight: bold;
-padding: 8px 14px;
-margin: 8px 6px 0 0;
-border: 1px solid #003366;
-<<<<<<< HEAD
->>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
-=======
-cursor: pointer;
->>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
-}
+
 /* Footer */
 footer {
-<<<<<<< HEAD
   padding: 14px 20px;
   margin-top: 20px;
   color: #ffffff;
@@ -423,37 +228,10 @@ footer p {
   }
 
   nav ul {
-=======
-background-color: #003366;
-color: #ffffff;
-text-align: center;
-padding: 14px 20px;
-margin-top: 20px;
-border: 1px solid #00264d;
-}
-footer p {
-margin: 0;
-}
-.form-feedback-error {
-color: #c62828;
-}
-.form-feedback-success {
-color: #2e7d32;
-}
-/* Layout untuk viewport yang lebih lebar */
-@media (min-width: 768px) {
-nav {
-margin-top: 16px;
-}
-nav ul {
-<<<<<<< HEAD
-    display: flex;
->>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
-<<<<<<< HEAD
   }
 
   #navMenu {
@@ -472,36 +250,4 @@ nav ul {
   #contact {
     grid-column: 1 / -1;
   }
-=======
-    margin: 0;
-    padding: 0;
-    list-style: none;
-=======
-flex-direction: row;
-justify-content: flex-start;
-align-items: center;
-gap: 16px;
->>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
 }
-main {
-<<<<<<< HEAD
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
->>>>>>> 5688b2b (Siapkan baseline P5 dari artefak P4)
-}
-=======
-grid-template-columns: 1fr 1fr;
-}
-#contact {
-grid-column: 1 / -1;
-}
-#navMenu {
-display: flex;
-flex-direction: row;
-}
-.nav-toggle {
-display: none;
-}
-}
->>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
