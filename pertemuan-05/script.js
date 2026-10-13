@@ -7,13 +7,20 @@ navToggle.addEventListener("click", () => {
   navToggle.setAttribute("aria-expanded", isOpen);
   navToggle.setAttribute(
     "aria-label",
+<<<<<<< HEAD
     isOpen ? "Tutup navigasi" : "Buka navigasi"
+=======
+    isOpen ? "Tutup navigasi" : "Buka navigasi",
+>>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
   );
 });
 
 const contactForm = document.getElementById("contactForm");
 const formFeedback = document.getElementById("formFeedback");
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
 const namaInput = document.getElementById("nama");
 const emailInput = document.getElementById("email");
 const semesterInput = document.getElementById("semester");
@@ -53,7 +60,11 @@ contactForm.addEventListener("submit", (event) => {
   }
 
   const jenisPesan = document.querySelector(
+<<<<<<< HEAD
     'input[name="jenis_pesan"]:checked'
+=======
+    'input[name="jenis_pesan"]:checked',
+>>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
   );
   if (!jenisPesan) {
     formFeedback.textContent = "Pilih jenis pesan.";
@@ -61,11 +72,18 @@ contactForm.addEventListener("submit", (event) => {
   }
 
   const topikDipilih = document.querySelectorAll(
+<<<<<<< HEAD
     'input[name="minat"]:checked'
   );
   if (topikDipilih.length === 0) {
     formFeedback.textContent =
       "Pilih minimal satu topik yang diminati.";
+=======
+    'input[name="minat"]:checked',
+  );
+  if (topikDipilih.length === 0) {
+    formFeedback.textContent = "Pilih minimal satu topik yang diminati.";
+>>>>>>> c5245ea (Hubungkan JavaScript eksternal ke HTML)
     return;
   }
 
