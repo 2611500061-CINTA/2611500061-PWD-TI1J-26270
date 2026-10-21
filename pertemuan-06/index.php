@@ -1,17 +1,41 @@
 <?php
 // P6: PHP dasar dan pemrograman sisi peladen
+
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500061";
-$namaMahasiswa = "Cinta bunda feliani";
+$namaMahasiswa = "Cinta Bunda Feliani";
 $programStudi = "TI";
 $tahunAkademik = "2026/2027";
 $semester = 2;
 $ipk = 3.75;
 $statusAktif = true;
 $catatanTambahan = null;
-const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "satpamal"; ?>
 
+const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
+const PROFIL_GITHUB = "satpamal";
+
+// Bagian 2: Operator
+$batasSemester = 8;
+$sisaSemester = $batasSemester - $semester;
+$semesterValid = $semester >= 1 && $semester <= $batasSemester;
+$statusSemester = ($semesterValid && $statusAktif)
+    ? "Sesuai rentang"
+    : "Perlu diperiksa";
+
+// Bagian 3: Percabangan if-elseif-else
+if ($semester < 3) {
+    $keteranganSemester = "Semester awal";
+} elseif ($semester <= 6) {
+    $keteranganSemester = "Semester menengah";
+} else {
+    $keteranganSemester = "Semester akhir";
+}
+
+// Bagian 4: Nama program studi
+$namaProdi = ($programStudi == "SI")
+    ? "Sistem Informasi"
+    : (($programStudi == "TI") ? "Teknik Informatika" : "Lainnya");
+?>
 
 <!doctype html>
 <html lang="id">
@@ -49,14 +73,13 @@ const PROFIL_GITHUB = "satpamal"; ?>
 
     <main>
       <section id="home">
-  <h2>Selamat Datang</h2>
-  <p>
-    Halo, saya <strong><?php echo $namaMahasiswa; ?></strong>. Saya sedang
-    mempelajari matakuliah
-    <strong><?php print NAMA_MATA_KULIAH; ?></strong>
-    pada tahun akademik <?php echo $tahunAkademik; ?>.
-  </p>
-
+        <h2>Selamat Datang</h2>
+        <p>
+          Halo, saya <strong><?= $namaMahasiswa ?></strong>. Saya sedang
+          mempelajari mata kuliah
+          <strong><?= NAMA_MATA_KULIAH ?></strong>
+          pada tahun akademik <?= $tahunAkademik ?>.
+        </p>
 
         <img src="foto-profil.jpg" alt="Foto profil Cinta Bunda Feliani" />
       </section>
@@ -65,14 +88,28 @@ const PROFIL_GITHUB = "satpamal"; ?>
         <h2>Tentang Saya</h2>
 
         <article>
+          <h3>Profil Singkat</h3>
+          <p>Sisa semester hingga batas: <?= $sisaSemester ?></p>
+          <p>Pemeriksaan rentang semester: <?= $statusSemester ?></p>
+          <p>
+            Semester: <?= $semester ?> (<?= $keteranganSemester ?>)
+          </p>
+          <p>Program Studi: <?= $namaProdi ?> (<?= $programStudi ?>)</p>
+          <p>Status mahasiswa: <?= $statusAktif ? "Aktif" : "Tidak aktif" ?></p>
+          <p>IPK: <?= number_format($ipk, 2, ',', '.') ?></p>
+          <p>
+            Catatan tambahan:
+            <?= $catatanTambahan === null ? "Belum ada" : $catatanTambahan ?>
+          </p>
+
           <h3>Nama</h3>
-          <p>Cinta Bunda Feliani</p>
+          <p><?= $namaMahasiswa ?></p>
 
           <h3>NIM</h3>
-          <p>2611500061</p>
+          <p><?= $nim ?></p>
 
           <h3>Jurusan</h3>
-          <p>Teknik Informatika</p>
+          <p><?= $namaProdi ?></p>
 
           <h3>Target Belajar</h3>
           <ol>
@@ -86,15 +123,17 @@ const PROFIL_GITHUB = "satpamal"; ?>
       <section id="contact">
         <h2>Kontak</h2>
 
-    <p>
-  Kunjungi
-  <a target="_blank" rel="noopener noreferrer"
-     href="https://github.com/<?= PROFIL_GITHUB ?>">
-    profil GitHub saya
-  </a>.
-</p>
+        <p>
+          Kunjungi
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/<?= PROFIL_GITHUB ?>">
+            profil GitHub saya
+          </a>.
+        </p>
 
-        <form id="contactForm" action="index.html" method="get" novalidate>
+        <form id="contactForm" action="index.php" method="get" novalidate>
           <div class="form-group">
             <label for="nama">Nama Lengkap</label>
             <input
@@ -152,17 +191,29 @@ const PROFIL_GITHUB = "satpamal"; ?>
               required />
             <label for="pertanyaan">Pertanyaan</label>
 
-            <input type="radio" id="saran" name="jenis_pesan" value="saran" />
+            <input
+              type="radio"
+              id="saran"
+              name="jenis_pesan"
+              value="saran" />
             <label for="saran">Saran</label>
           </fieldset>
 
           <fieldset class="form-group">
             <legend>Topik yang Diminati</legend>
 
-            <input type="checkbox" id="minat-html" name="minat" value="HTML" />
+            <input
+              type="checkbox"
+              id="minat-html"
+              name="minat"
+              value="HTML" />
             <label for="minat-html">HTML</label>
 
-            <input type="checkbox" id="minat-css" name="minat" value="CSS" />
+            <input
+              type="checkbox"
+              id="minat-css"
+              name="minat"
+              value="CSS" />
             <label for="minat-css">CSS</label>
           </fieldset>
 
@@ -195,7 +246,7 @@ const PROFIL_GITHUB = "satpamal"; ?>
     </main>
 
     <footer>
-      <p>&copy; 2026 Cinta Bunda Feliani (2611500061)</p>
+      <p>&copy; <?= date("Y") ?> <?= $namaMahasiswa ?> (<?= $nim ?>)</p>
     </footer>
 
     <script src="script.js"></script>
