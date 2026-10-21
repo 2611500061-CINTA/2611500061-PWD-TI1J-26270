@@ -12,6 +12,7 @@ $catatanTambahan = null;
 const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
 const PROFIL_GITHUB = "satpamal"; ?>
 
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -85,10 +86,12 @@ const PROFIL_GITHUB = "satpamal"; ?>
       <section id="contact">
         <h2>Kontak</h2>
 
-      <p>
-        Kunjungi
-        <a target="_blank" href="https://github.com/2611500061-CINTA/2611500061-PWD-TI1J-26270 <?= PROFIL_GITHUB ?>"
-        >profil GitHub saya</a>.
+    <p>
+  Kunjungi
+  <a target="_blank" rel="noopener noreferrer"
+     href="https://github.com/<?= PROFIL_GITHUB ?>">
+    profil GitHub saya
+  </a>.
 </p>
 
         <form id="contactForm" action="index.html" method="get" novalidate>
