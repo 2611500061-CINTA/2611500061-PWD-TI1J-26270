@@ -1,3 +1,17 @@
+<?php
+// P6: PHP dasar dan pemrograman sisi peladen
+// Bagian 1: Variabel dan konstanta
+$nim = "2611500061";
+$namaMahasiswa = "Cinta bunda feliani";
+$programStudi = "TI";
+$tahunAkademik = "2026/2027";
+$semester = 2;
+$ipk = 3.75;
+$statusAktif = true;
+$catatanTambahan = null;
+const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
+const PROFIL_GITHUB = "satpamal"; ?>
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -34,12 +48,14 @@
 
     <main>
       <section id="home">
-        <h2>Selamat Datang</h2>
+  <h2>Selamat Datang</h2>
+  <p>
+    Halo, saya <strong><?php echo $namaMahasiswa; ?></strong>. Saya sedang
+    mempelajari matakuliah
+    <strong><?php print NAMA_MATA_KULIAH; ?></strong>
+    pada tahun akademik <?php echo $tahunAkademik; ?>.
+  </p>
 
-        <p>
-          Halo, saya Cinta Bunda Feliani. Saya sedang mempelajari pemrograman
-          web dasar.
-        </p>
 
         <img src="foto-profil.jpg" alt="Foto profil Cinta Bunda Feliani" />
       </section>
@@ -69,15 +85,11 @@
       <section id="contact">
         <h2>Kontak</h2>
 
-        <p>
-          Kunjungi
-          <a
-            href="https://github.com/2611500061-CINTA/2611500061-PWD-TI1J-26270"
-            target="_blank"
-            rel="noopener noreferrer">
-            profil GitHub saya </a
-          >.
-        </p>
+      <p>
+        Kunjungi
+        <a target="_blank" href="https://github.com/2611500061-CINTA/2611500061-PWD-TI1J-26270 <?= PROFIL_GITHUB ?>"
+        >profil GitHub saya</a>.
+</p>
 
         <form id="contactForm" action="index.html" method="get" novalidate>
           <div class="form-group">
