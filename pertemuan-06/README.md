@@ -115,5 +115,8 @@ Kesimpulan
 Pada Pertemuan 6, saya mengembangkan kembali proyek P5 dengan PHP pada folder pertemuan-06/. Saya menerapkan variabel, konstanta, operator, percabangan, perulangan, dan fungsi bawaan PHP pada halaman profil mahasiswa.
 Saya menjalankan proyek melalui Laragon dan localhost, lalu mencatat hasil pengujian berdasarkan hasil yang benar-benar saya lihat.
 
+<<<<<<< HEAD
 
 ```
+=======
+>>>>>>> 6e06d5c9978548cdda8c94fd7bfb274017ac8468
