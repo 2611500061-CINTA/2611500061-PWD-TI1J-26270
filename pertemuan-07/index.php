@@ -1,6 +1,11 @@
 <?php
-// P6: PHP dasar dan pemrograman sisi peladen
+// P7 : menangkap nilai dari input form
+echo $_GET['nama'] . " ";
+echo $_GET['email'] . " ";
+echo $_GET['semester'] . " ";
 
+
+// P6: PHP dasar dan pemrograman sisi peladen\
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500061";
 $namaMahasiswa = "Cinta bunda feliani";
