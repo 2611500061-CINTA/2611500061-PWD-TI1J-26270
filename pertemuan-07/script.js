@@ -1,3 +1,4 @@
+
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
 
@@ -22,12 +23,13 @@ const prodiInput = document.getElementById("prodi");
 const pesanInput = document.getElementById("pesan");
 
 contactForm.addEventListener("submit", (event) => {
-  //event.preventDefault();
+  // event.preventDefault();
 
   formFeedback.className = "form-feedback-error";
 
   const nama = namaInput.value.trim();
   if (nama.length < 3 || nama.length > 50) {
+    event.preventDefault();
     formFeedback.textContent =
       "Nama lengkap harus diisi 3 sampai 50 karakter.";
     return;
@@ -36,18 +38,21 @@ contactForm.addEventListener("submit", (event) => {
   const email = emailInput.value.trim();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
+    event.preventDefault();
     formFeedback.textContent = "Masukkan alamat email yang valid.";
     return;
   }
 
   const semester = Number(semesterInput.value);
   if (semesterInput.value === "" || semester < 1 || semester > 14) {
+    event.preventDefault();
     formFeedback.textContent =
       "Semester harus diisi dengan angka 1 sampai 14.";
     return;
   }
 
   if (tanggalInput.value === "") {
+    event.preventDefault();
     formFeedback.textContent = "Tanggal kunjungan harus diisi.";
     return;
   }
@@ -56,31 +61,36 @@ contactForm.addEventListener("submit", (event) => {
     'input[name="jenis_pesan"]:checked'
   );
   if (!jenisPesan) {
+    event.preventDefault();
     formFeedback.textContent = "Pilih jenis pesan.";
     return;
   }
 
   const topikDipilih = document.querySelectorAll(
-    'input[name="minat"]:checked'
+    'input[name="minat"]:checked, input[name="minat[]"]:checked'
   );
   if (topikDipilih.length === 0) {
+    event.preventDefault();
     formFeedback.textContent =
       "Pilih minimal satu topik yang diminati.";
     return;
   }
 
   if (prodiInput.value === "") {
+    event.preventDefault();
     formFeedback.textContent = "Pilih program studi.";
     return;
   }
 
   const pesan = pesanInput.value.trim();
   if (pesan.length === 0) {
+    event.preventDefault();
     formFeedback.textContent = "Pesan harus diisi.";
     return;
   }
 
   if (pesan.length > 300) {
+    event.preventDefault();
     formFeedback.textContent = "Pesan maksimal 300 karakter.";
     return;
   }
