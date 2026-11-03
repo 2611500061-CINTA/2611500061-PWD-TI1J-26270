@@ -199,13 +199,15 @@ fieldset legend {
   background-color: #1f4e78;
 }
 
-#peminjamanForm button[type="reset"] {
+#contact button[form="resetKontakForm"],
+#peminjamanForm button[form="resetPeminjamanForm"] {
   color: #111827;
   background-color: #e2e8f0;
   border-color: #cbd5e1;
 }
 
-#peminjamanForm button[type="reset"]:hover {
+#contact button[form="resetKontakForm"]:hover,
+#peminjamanForm button[form="resetPeminjamanForm"]:hover {
   background-color: #cbd5e1;
 }
 

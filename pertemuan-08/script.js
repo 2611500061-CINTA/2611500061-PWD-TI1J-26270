@@ -80,45 +80,26 @@ if (peminjamanForm && peminjamanFeedback) {
     peminjamanFeedback.textContent = "";
     peminjamanFeedback.className = "form-feedback-error";
 
-    const nama = document.getElementById("namaPeminjam").value.trim();
-    const nim = document.getElementById("nimPeminjam").value.trim();
-    const email = document.getElementById("emailPeminjam").value.trim();
-    const fasilitas = document.getElementById("fasilitas").value;
+    const nama = document.getElementById("namaPenanggungJawab").value.trim();
+    const jenisFasilitas = document.getElementById("jenisFasilitas").value;
     const tanggal = document.getElementById("tanggalPeminjaman").value;
-    const waktuMulai = document.getElementById("waktuMulai").value;
-    const waktuSelesai = document.getElementById("waktuSelesai").value;
-    const jumlahPeserta = Number(
-      document.getElementById("jumlahPeserta").value
-    );
-    const keperluan = document.getElementById("keperluan").value.trim();
-
-    const sekarang = new Date();
-    const hariIni = new Date(
-      sekarang.getTime() - sekarang.getTimezoneOffset() * 60000
-    )
-      .toISOString()
-      .slice(0, 10);
+    const durasi = Number(document.getElementById("durasiPeminjaman").value);
+    const keperluan = document
+      .getElementById("keperluanPeminjaman")
+      .value.trim();
 
     let kesalahan = "";
 
     if (nama.length < 3 || nama.length > 50) {
-      kesalahan = "Nama peminjam harus diisi 3 sampai 50 karakter.";
-    } else if (!nim) {
-      kesalahan = "NIM wajib diisi.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      kesalahan = "Masukkan alamat email peminjam yang valid.";
-    } else if (!fasilitas) {
-      kesalahan = "Silakan pilih fasilitas kampus.";
-    } else if (!tanggal || tanggal < hariIni) {
-      kesalahan = "Pilih tanggal hari ini atau setelahnya.";
-    } else if (!waktuMulai || !waktuSelesai) {
-      kesalahan = "Waktu mulai dan selesai wajib diisi.";
-    } else if (waktuSelesai <= waktuMulai) {
-      kesalahan = "Waktu selesai harus setelah waktu mulai.";
-    } else if (!Number.isInteger(jumlahPeserta) || jumlahPeserta < 1) {
-      kesalahan = "Jumlah peserta minimal 1 orang.";
-    } else if (keperluan.length < 5) {
-      kesalahan = "Keperluan peminjaman minimal 5 karakter.";
+      kesalahan = "Nama penanggung jawab harus 3 sampai 50 karakter.";
+    } else if (!jenisFasilitas) {
+      kesalahan = "Pilih jenis fasilitas.";
+    } else if (!tanggal) {
+      kesalahan = "Tanggal peminjaman wajib diisi.";
+    } else if (!Number.isInteger(durasi) || durasi < 1) {
+      kesalahan = "Durasi peminjaman minimal 1 jam.";
+    } else if (!keperluan) {
+      kesalahan = "Keperluan peminjaman wajib diisi.";
     }
 
     if (kesalahan) {

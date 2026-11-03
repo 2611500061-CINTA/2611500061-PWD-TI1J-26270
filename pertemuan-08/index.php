@@ -28,21 +28,13 @@ $pesanBerhasil = '';
 $kesalahanPeminjaman = '';
 $berhasilPeminjaman = '';
 
-// Tombol reset kontak menghapus data kontak dari sesi.
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST'
-    && ($_POST['form_type'] ?? '') === 'reset_kontak'
-) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'reset_kontak') {
     unset($_SESSION['kontak'], $_SESSION['pesanBerhasil']);
     header('Location: ' . $_SERVER['PHP_SELF'] . '#contact');
     exit;
 }
 
-// Tombol reset peminjaman menghapus data peminjaman dari sesi.
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST'
-    && ($_POST['form_type'] ?? '') === 'reset_peminjaman'
-) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'reset_peminjaman') {
     unset($_SESSION['peminjaman'], $_SESSION['berhasilPeminjaman']);
     header('Location: ' . $_SERVER['PHP_SELF'] . '#peminjaman');
     exit;
@@ -60,15 +52,11 @@ $kontak = $_SESSION['kontak'] ?? [
 ];
 
 $peminjaman = $_SESSION['peminjaman'] ?? [
-    'namaPeminjam' => '',
-    'nimPeminjam' => '',
-    'emailPeminjam' => '',
-    'fasilitas' => '',
+    'namaPenanggungJawab' => '',
+    'jenisFasilitas' => '',
     'tanggalPeminjaman' => '',
-    'waktuMulai' => '',
-    'waktuSelesai' => '',
-    'jumlahPeserta' => '',
-    'keperluan' => '',
+    'durasiPeminjaman' => '',
+    'keperluanPeminjaman' => '',
 ];
 
 if (isset($_SESSION['pesanBerhasil'])) {
@@ -84,7 +72,7 @@ if (isset($_SESSION['berhasilPeminjaman'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenisForm = $_POST['form_type'] ?? '';
 
-    // Peladen formulir kontak.
+    // Peladen formulir kontak
     if ($jenisForm === 'contact') {
         $kontak = [
             'nama' => trim((string) ($_POST['nama'] ?? '')),
@@ -146,54 +134,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Peladen formulir peminjaman fasilitas.
+    // Peladen formulir peminjaman fasilitas
     if ($jenisForm === 'peminjaman') {
         $peminjaman = [
-            'namaPeminjam' => trim((string) ($_POST['namaPeminjam'] ?? '')),
-            'nimPeminjam' => trim((string) ($_POST['nimPeminjam'] ?? '')),
-            'emailPeminjam' => trim((string) ($_POST['emailPeminjam'] ?? '')),
-            'fasilitas' => trim((string) ($_POST['fasilitas'] ?? '')),
+            'namaPenanggungJawab' => trim((string) ($_POST['namaPenanggungJawab'] ?? '')),
+            'jenisFasilitas' => trim((string) ($_POST['jenisFasilitas'] ?? '')),
             'tanggalPeminjaman' => trim((string) ($_POST['tanggalPeminjaman'] ?? '')),
-            'waktuMulai' => trim((string) ($_POST['waktuMulai'] ?? '')),
-            'waktuSelesai' => trim((string) ($_POST['waktuSelesai'] ?? '')),
-            'jumlahPeserta' => trim((string) ($_POST['jumlahPeserta'] ?? '')),
-            'keperluan' => trim((string) ($_POST['keperluan'] ?? '')),
+            'durasiPeminjaman' => trim((string) ($_POST['durasiPeminjaman'] ?? '')),
+            'keperluanPeminjaman' => trim((string) ($_POST['keperluanPeminjaman'] ?? '')),
         ];
 
-        $daftarFasilitas = [
+        $fasilitasDiizinkan = [
             'Ruang Kelas',
+            'Aula',
             'Laboratorium Komputer',
-            'Aula Kampus',
-            'Ruang Seminar',
-            'Lapangan Kampus',
+            'Proyektor',
         ];
 
-        if (strlen($peminjaman['namaPeminjam']) < 3 || strlen($peminjaman['namaPeminjam']) > 50) {
-            $kesalahanPeminjaman = 'Nama peminjam harus diisi 3 sampai 50 karakter.';
-        } elseif ($peminjaman['nimPeminjam'] === '') {
-            $kesalahanPeminjaman = 'NIM wajib diisi.';
-        } elseif (!filter_var($peminjaman['emailPeminjam'], FILTER_VALIDATE_EMAIL)) {
-            $kesalahanPeminjaman = 'Alamat email peminjam tidak valid.';
-        } elseif (!in_array($peminjaman['fasilitas'], $daftarFasilitas, true)) {
-            $kesalahanPeminjaman = 'Silakan pilih fasilitas kampus.';
+        if (
+            strlen($peminjaman['namaPenanggungJawab']) < 3
+            || strlen($peminjaman['namaPenanggungJawab']) > 50
+        ) {
+            $kesalahanPeminjaman = 'Nama penanggung jawab harus 3 sampai 50 karakter.';
+        } elseif (!in_array($peminjaman['jenisFasilitas'], $fasilitasDiizinkan, true)) {
+            $kesalahanPeminjaman = 'Pilih jenis fasilitas yang tersedia.';
         } elseif (!tanggalValid($peminjaman['tanggalPeminjaman'])) {
             $kesalahanPeminjaman = 'Tanggal peminjaman tidak valid.';
-        } elseif ($peminjaman['tanggalPeminjaman'] < date('Y-m-d')) {
-            $kesalahanPeminjaman = 'Tanggal peminjaman tidak boleh sebelum hari ini.';
         } elseif (
-            !preg_match('/^\d{2}:\d{2}$/', $peminjaman['waktuMulai'])
-            || !preg_match('/^\d{2}:\d{2}$/', $peminjaman['waktuSelesai'])
+            filter_var($peminjaman['durasiPeminjaman'], FILTER_VALIDATE_INT) === false
+            || (int) $peminjaman['durasiPeminjaman'] < 1
         ) {
-            $kesalahanPeminjaman = 'Waktu mulai dan selesai wajib diisi dengan benar.';
-        } elseif ($peminjaman['waktuSelesai'] <= $peminjaman['waktuMulai']) {
-            $kesalahanPeminjaman = 'Waktu selesai harus setelah waktu mulai.';
-        } elseif (
-            filter_var($peminjaman['jumlahPeserta'], FILTER_VALIDATE_INT) === false
-            || (int) $peminjaman['jumlahPeserta'] < 1
-        ) {
-            $kesalahanPeminjaman = 'Jumlah peserta minimal 1 orang.';
-        } elseif (strlen($peminjaman['keperluan']) < 5) {
-            $kesalahanPeminjaman = 'Keperluan peminjaman minimal 5 karakter.';
+            $kesalahanPeminjaman = 'Durasi peminjaman minimal 1 jam.';
+        } elseif ($peminjaman['keperluanPeminjaman'] === '') {
+            $kesalahanPeminjaman = 'Keperluan peminjaman wajib diisi.';
         } else {
             $_SESSION['peminjaman'] = $peminjaman;
             $_SESSION['berhasilPeminjaman'] = 'Permohonan peminjaman fasilitas berhasil dikirim.';
@@ -263,6 +236,78 @@ $minatKontak = is_array($kontak['minat']) ? $kontak['minat'] : [];
                 <li>Mempelajari JavaScript</li>
                 <li>Mempelajari PHP</li>
             </ol>
+        </section>
+
+        <!-- Formulir baru ditempatkan sebelum section Kontak -->
+        <section id="peminjaman">
+            <h2>Permohonan Peminjaman Fasilitas Kampus</h2>
+
+            <form id="peminjamanForm" method="post" action="#peminjaman">
+                <input type="hidden" name="form_type" value="peminjaman">
+
+                <div class="form-group">
+                    <label for="namaPenanggungJawab">Nama Penanggung Jawab</label>
+                    <input class="input-form" type="text" id="namaPenanggungJawab"
+                        name="namaPenanggungJawab" minlength="3" maxlength="50"
+                        value="<?= h($peminjaman['namaPenanggungJawab']) ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jenisFasilitas">Jenis Fasilitas</label>
+                    <select class="input-form" id="jenisFasilitas" name="jenisFasilitas" required>
+                        <option value="">-- Pilih Fasilitas --</option>
+                        <?php foreach (['Ruang Kelas', 'Aula', 'Laboratorium Komputer', 'Proyektor'] as $fasilitas): ?>
+                            <option value="<?= h($fasilitas) ?>"
+                                <?= $peminjaman['jenisFasilitas'] === $fasilitas ? 'selected' : '' ?>>
+                                <?= h($fasilitas) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tanggalPeminjaman">Tanggal Peminjaman</label>
+                    <input class="input-form" type="date" id="tanggalPeminjaman"
+                        name="tanggalPeminjaman" value="<?= h($peminjaman['tanggalPeminjaman']) ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="durasiPeminjaman">Durasi Peminjaman (jam)</label>
+                    <input class="input-form" type="number" id="durasiPeminjaman"
+                        name="durasiPeminjaman" min="1"
+                        value="<?= h($peminjaman['durasiPeminjaman']) ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="keperluanPeminjaman">Keperluan Peminjaman</label>
+                    <textarea class="input-form" id="keperluanPeminjaman"
+                        name="keperluanPeminjaman" required><?= h($peminjaman['keperluanPeminjaman']) ?></textarea>
+                </div>
+
+                <p id="peminjamanFeedback" class="form-feedback-error" aria-live="polite">
+                    <?= h($kesalahanPeminjaman) ?>
+                </p>
+
+                <?php if ($berhasilPeminjaman !== ''): ?>
+                    <p class="form-feedback-success"><?= h($berhasilPeminjaman) ?></p>
+                <?php endif; ?>
+
+                <button type="submit">Kirim</button>
+                <button type="submit" form="resetPeminjamanForm">Batal</button>
+            </form>
+
+            <form id="resetPeminjamanForm" method="post" action="#peminjaman">
+                <input type="hidden" name="form_type" value="reset_peminjaman">
+            </form>
+
+            <?php if ($peminjaman['namaPenanggungJawab'] !== ''): ?>
+                <h3>Data Permohonan yang Diterima Peladen</h3>
+                <p>Nama Penanggung Jawab: <?= h($peminjaman['namaPenanggungJawab']) ?></p>
+                <p>Jenis Fasilitas: <?= h($peminjaman['jenisFasilitas']) ?></p>
+                <p>Tanggal Peminjaman: <?= h($peminjaman['tanggalPeminjaman']) ?></p>
+                <p>Durasi Peminjaman: <?= h($peminjaman['durasiPeminjaman']) ?> jam</p>
+                <p>Keperluan: <?= nl2br(h($peminjaman['keperluanPeminjaman'])) ?></p>
+            <?php endif; ?>
         </section>
 
         <section id="contact">
@@ -351,7 +396,7 @@ $minatKontak = is_array($kontak['minat']) ? $kontak['minat'] : [];
                 <?php endif; ?>
 
                 <button type="submit">Kirim Pesan</button>
-                <button type="submit" form="resetKontakForm">Reset</button>
+                <button type="submit" form="resetKontakForm">Batal</button>
             </form>
 
             <form id="resetKontakForm" method="post" action="#contact">
@@ -368,103 +413,6 @@ $minatKontak = is_array($kontak['minat']) ? $kontak['minat'] : [];
                 <p>Program studi: <?= h($kontak['prodi']) ?></p>
                 <p>Minat: <?= h(implode(', ', $minatKontak)) ?></p>
                 <p>Pesan: <?= nl2br(h($kontak['pesan'])) ?></p>
-            <?php endif; ?>
-        </section>
-
-        <section id="peminjaman">
-            <h2>Formulir Permohonan Peminjaman Fasilitas Kampus</h2>
-            <p>Silakan isi data berikut untuk mengajukan permohonan peminjaman fasilitas kampus.</p>
-
-            <form id="peminjamanForm" method="post" action="#peminjaman">
-                <input type="hidden" name="form_type" value="peminjaman">
-
-                <div class="form-group">
-                    <label for="namaPeminjam">Nama Lengkap Peminjam</label>
-                    <input type="text" id="namaPeminjam" name="namaPeminjam"
-                        minlength="3" maxlength="50" value="<?= h($peminjaman['namaPeminjam']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="nimPeminjam">NIM</label>
-                    <input type="text" id="nimPeminjam" name="nimPeminjam"
-                        value="<?= h($peminjaman['nimPeminjam']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="emailPeminjam">Email</label>
-                    <input type="email" id="emailPeminjam" name="emailPeminjam"
-                        value="<?= h($peminjaman['emailPeminjam']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="fasilitas">Fasilitas yang Dipinjam</label>
-                    <select id="fasilitas" name="fasilitas" required>
-                        <option value="">-- Pilih Fasilitas --</option>
-                        <?php foreach (['Ruang Kelas', 'Laboratorium Komputer', 'Aula Kampus', 'Ruang Seminar', 'Lapangan Kampus'] as $item): ?>
-                            <option value="<?= h($item) ?>"
-                                <?= $peminjaman['fasilitas'] === $item ? 'selected' : '' ?>>
-                                <?= h($item) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tanggalPeminjaman">Tanggal Peminjaman</label>
-                    <input type="date" id="tanggalPeminjaman" name="tanggalPeminjaman"
-                        min="<?= h(date('Y-m-d')) ?>"
-                        value="<?= h($peminjaman['tanggalPeminjaman']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="waktuMulai">Waktu Mulai</label>
-                    <input type="time" id="waktuMulai" name="waktuMulai"
-                        value="<?= h($peminjaman['waktuMulai']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="waktuSelesai">Waktu Selesai</label>
-                    <input type="time" id="waktuSelesai" name="waktuSelesai"
-                        value="<?= h($peminjaman['waktuSelesai']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="jumlahPeserta">Jumlah Peserta</label>
-                    <input type="number" id="jumlahPeserta" name="jumlahPeserta"
-                        min="1" value="<?= h($peminjaman['jumlahPeserta']) ?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="keperluan">Keperluan Peminjaman</label>
-                    <textarea id="keperluan" name="keperluan" minlength="5" required><?= h($peminjaman['keperluan']) ?></textarea>
-                </div>
-
-                <p id="peminjamanFeedback" class="form-feedback-error" aria-live="polite">
-                    <?= h($kesalahanPeminjaman) ?>
-                </p>
-
-                <?php if ($berhasilPeminjaman !== ''): ?>
-                    <p class="form-feedback-success"><?= h($berhasilPeminjaman) ?></p>
-                <?php endif; ?>
-
-                <button type="submit">Kirim Permohonan</button>
-                <button type="submit" form="resetPeminjamanForm">Reset Formulir</button>
-            </form>
-
-            <form id="resetPeminjamanForm" method="post" action="#peminjaman">
-                <input type="hidden" name="form_type" value="reset_peminjaman">
-            </form>
-
-            <?php if ($peminjaman['namaPeminjam'] !== ''): ?>
-                <h3>Data Permohonan yang Diterima Peladen</h3>
-                <p>Nama: <?= h($peminjaman['namaPeminjam']) ?></p>
-                <p>NIM: <?= h($peminjaman['nimPeminjam']) ?></p>
-                <p>Email: <?= h($peminjaman['emailPeminjam']) ?></p>
-                <p>Fasilitas: <?= h($peminjaman['fasilitas']) ?></p>
-                <p>Tanggal: <?= h($peminjaman['tanggalPeminjaman']) ?></p>
-                <p>Waktu: <?= h($peminjaman['waktuMulai']) ?>–<?= h($peminjaman['waktuSelesai']) ?></p>
-                <p>Jumlah peserta: <?= h($peminjaman['jumlahPeserta']) ?></p>
-                <p>Keperluan: <?= nl2br(h($peminjaman['keperluan'])) ?></p>
             <?php endif; ?>
         </section>
     </main>
