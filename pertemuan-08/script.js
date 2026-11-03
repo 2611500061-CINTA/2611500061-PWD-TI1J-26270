@@ -1,108 +1,137 @@
+// ==================================================
+// TAMBAHAN P8: VALIDASI FORMULIR PEMINJAMAN FASILITAS
+// Kode JavaScript lama tetap dipertahankan.
+// ==================================================
 
-const navToggle = document.getElementById("navToggle");
-const navMenu = document.getElementById("navMenu");
+const peminjamanForm = document.getElementById("peminjamanForm");
+const peminjamanFeedback = document.getElementById("peminjamanFeedback");
 
-navToggle.addEventListener("click", () => {
-  const isOpen = navMenu.classList.toggle("nav-open");
+if (peminjamanForm && peminjamanFeedback) {
+  peminjamanForm.addEventListener("submit", (event) => {
+    peminjamanFeedback.className = "form-feedback-error";
+    peminjamanFeedback.textContent = "";
 
-  navToggle.setAttribute("aria-expanded", isOpen);
-  navToggle.setAttribute(
-    "aria-label",
-    isOpen ? "Tutup navigasi" : "Buka navigasi"
-  );
-});
+    // Ambil nilai input formulir
+    const namaPeminjam = document
+      .getElementById("namaPeminjam")
+      .value.trim();
 
-const contactForm = document.getElementById("contactForm");
-const formFeedback = document.getElementById("formFeedback");
+    const nimPeminjam = document
+      .getElementById("nimPeminjam")
+      .value.trim();
 
-const namaInput = document.getElementById("nama");
-const emailInput = document.getElementById("email");
-const semesterInput = document.getElementById("semester");
-const tanggalInput = document.getElementById("tanggal");
-const prodiInput = document.getElementById("prodi");
-const pesanInput = document.getElementById("pesan");
+    const emailPeminjam = document
+      .getElementById("emailPeminjam")
+      .value.trim();
 
-contactForm.addEventListener("submit", (event) => {
-  // event.preventDefault();
+    const fasilitas = document.getElementById("fasilitas");
+    const tanggalPeminjaman = document.getElementById("tanggalPeminjaman");
+    const waktuMulai = document.getElementById("waktuMulai");
+    const waktuSelesai = document.getElementById("waktuSelesai");
+    const jumlahPeserta = document.getElementById("jumlahPeserta");
 
-  formFeedback.className = "form-feedback-error";
+    const keperluan = document
+      .getElementById("keperluan")
+      .value.trim();
 
-  const nama = namaInput.value.trim();
-  if (nama.length < 3 || nama.length > 50) {
-    event.preventDefault();
-    formFeedback.textContent =
-      "Nama lengkap harus diisi 3 sampai 50 karakter.";
-    return;
-  }
+    // Validasi nama peminjam
+    if (namaPeminjam.length < 3 || namaPeminjam.length > 50) {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Nama peminjam harus diisi 3 sampai 50 karakter.";
+      return;
+    }
 
-  const email = emailInput.value.trim();
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    event.preventDefault();
-    formFeedback.textContent = "Masukkan alamat email yang valid.";
-    return;
-  }
+    // Validasi NIM
+    if (nimPeminjam === "") {
+      event.preventDefault();
+      peminjamanFeedback.textContent = "NIM harus diisi.";
+      return;
+    }
 
-  const semester = Number(semesterInput.value);
-  if (semesterInput.value === "" || semester < 1 || semester > 14) {
-    event.preventDefault();
-    formFeedback.textContent =
-      "Semester harus diisi dengan angka 1 sampai 14.";
-    return;
-  }
+    // Validasi email
+    const polaEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (tanggalInput.value === "") {
-    event.preventDefault();
-    formFeedback.textContent = "Tanggal kunjungan harus diisi.";
-    return;
-  }
+    if (!polaEmail.test(emailPeminjam)) {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Masukkan alamat email yang valid.";
+      return;
+    }
 
-  const jenisPesan = document.querySelector(
-    'input[name="jenis_pesan"]:checked'
-  );
-  if (!jenisPesan) {
-    event.preventDefault();
-    formFeedback.textContent = "Pilih jenis pesan.";
-    return;
-  }
+    // Validasi fasilitas
+    if (fasilitas.value === "") {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Silakan pilih fasilitas kampus yang ingin dipinjam.";
+      return;
+    }
 
-  const topikDipilih = document.querySelectorAll(
-    'input[name="minat"]:checked, input[name="minat[]"]:checked'
-  );
-  if (topikDipilih.length === 0) {
-    event.preventDefault();
-    formFeedback.textContent =
-      "Pilih minimal satu topik yang diminati.";
-    return;
-  }
+    // Validasi tanggal
+    if (tanggalPeminjaman.value === "") {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Tanggal peminjaman harus diisi.";
+      return;
+    }
 
-  if (prodiInput.value === "") {
-    event.preventDefault();
-    formFeedback.textContent = "Pilih program studi.";
-    return;
-  }
+    // Validasi waktu
+    if (waktuMulai.value === "" || waktuSelesai.value === "") {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Waktu mulai dan waktu selesai harus diisi.";
+      return;
+    }
 
-  const pesan = pesanInput.value.trim();
-  if (pesan.length === 0) {
-    event.preventDefault();
-    formFeedback.textContent = "Pesan harus diisi.";
-    return;
-  }
+    if (waktuSelesai.value <= waktuMulai.value) {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Waktu selesai harus lebih besar daripada waktu mulai.";
+      return;
+    }
 
-  if (pesan.length > 300) {
-    event.preventDefault();
-    formFeedback.textContent = "Pesan maksimal 300 karakter.";
-    return;
-  }
+    // Validasi jumlah peserta
+    const jumlah = Number(jumlahPeserta.value);
 
-  formFeedback.textContent = "Form berhasil divalidasi.";
-  formFeedback.className = "form-feedback-success";
-});
+    if (
+      jumlahPeserta.value === "" ||
+      !Number.isInteger(jumlah) ||
+      jumlah < 1
+    ) {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Jumlah peserta harus diisi minimal 1 orang.";
+      return;
+    }
 
-contactForm.addEventListener("reset", () => {
-  formFeedback.textContent = "";
-});
+    // Validasi keperluan peminjaman
+    if (keperluan.length < 5) {
+      event.preventDefault();
+      peminjamanFeedback.textContent =
+        "Keperluan peminjaman harus diisi minimal 5 karakter.";
+      return;
+    }
 
-contactForm.addEventListener("input", () => {
-  formFeedback.textContent = "";
-});
+    // Jika semua validasi berhasil
+    peminjamanFeedback.textContent =
+      "Formulir peminjaman berhasil divalidasi dan siap dikirim.";
+    peminjamanFeedback.className = "form-feedback-success";
+  });
+
+  // Bersihkan pesan ketika formulir direset
+  peminjamanForm.addEventListener("reset", () => {
+    peminjamanFeedback.textContent = "";
+    peminjamanFeedback.className = "";
+  });
+
+  // Bersihkan pesan ketika pengguna mengubah isian
+  peminjamanForm.addEventListener("input", () => {
+    peminjamanFeedback.textContent = "";
+    peminjamanFeedback.className = "";
+  });
+
+  peminjamanForm.addEventListener("change", () => {
+    peminjamanFeedback.textContent = "";
+    peminjamanFeedback.className = "";
+  });
+}

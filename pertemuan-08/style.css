@@ -1,253 +1,468 @@
+/* ==========================================
+   PERTEMUAN 08
+   PROFIL MAHASISWA DAN PEMINJAMAN FASILITAS
+========================================== */
+
+/* RESET CSS */
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
 }
 
 body {
-  margin: 0;
-  padding: 12px;
-  font-family: Arial, sans-serif;
-  color: #111827;
-  background-color: #eef2f7;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111827;
+    background-color: #eef2f7;
+    line-height: 1.6;
+    padding: 12px;
 }
 
-/* Header */
+/* ==========================================
+   HEADER
+========================================== */
+
 header {
-  padding: 20px;
-  margin-bottom: 20px;
-  color: #ffffff;
-  background-color: #003366;
-  border: 1px solid #00264d;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 28px;
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Navigasi */
+header h1 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+/* ==========================================
+   NAVIGASI
+========================================== */
+
 nav ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 10px;
 }
 
-#navMenu {
-  display: none;
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 9px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#navMenu.nav-open {
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
+nav ul li a:hover {
+    background-color: #00509e;
 }
 
-nav a {
-  color: #ffffff;
-  font-weight: bold;
-  text-decoration: none;
+nav ul li a:focus {
+    outline: 2px solid white;
+    outline-offset: 3px;
 }
+
+/* ==========================================
+   HAMBURGER MENU
+========================================== */
 
 .nav-toggle {
-  display: block;
-  border: none;
-  background: transparent;
-  color: #ffffff;
-  font-size: 1.8rem;
-  line-height: 1;
-  cursor: pointer;
+    display: none;
+    background-color: #ffffff;
+    color: #003366;
+    border: none;
+    padding: 8px 13px;
+    border-radius: 5px;
+    font-size: 23px;
+    cursor: pointer;
 }
 
-/* Layout utama */
+/* ==========================================
+   MAIN
+========================================== */
+
 main {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
 }
+
+/* ==========================================
+   SECTION
+========================================== */
 
 section {
-  width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-/* Bagian Beranda */
-#home {
-  padding: 20px;
-  margin: 0;
-  background-color: #ffffff;
-  border: 1px solid #d0d7de;
+section h2 {
+    color: #003366;
+    margin-bottom: 15px;
+    font-size: 23px;
 }
 
-#home h2,
-#about h2,
-#contact h2 {
-  padding-bottom: 6px;
-  margin-top: 0;
-  margin-bottom: 16px;
-  color: #003366;
-  border-bottom: 2px solid #003366;
+section h3 {
+    color: #003366;
+    margin-top: 18px;
+    margin-bottom: 8px;
 }
 
-#home p {
-  margin: 0 0 16px;
-  line-height: 1.6;
+section p {
+    margin-bottom: 10px;
 }
+
+/* ==========================================
+   FOTO PROFIL
+========================================== */
 
 #home img {
-  display: block;
-  width: 240px;
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #cbd5e1;
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 2px solid #d0d7de;
 }
 
-/* Bagian Tentang */
-#about {
-  padding: 20px;
-  margin: 0;
-  background-color: #ffffff;
-  border: 1px solid #d0d7de;
+/* ==========================================
+   TENTANG SAYA
+========================================== */
+
+#about article {
+    line-height: 1.8;
 }
 
-#about h3 {
-  margin-bottom: 6px;
-  color: #1f4e78;
+#about ol,
+#about ul {
+    padding-left: 25px;
+    margin-bottom: 15px;
 }
 
-#about p {
-  padding: 6px 0;
-  margin: 6px 0;
-  line-height: 1.5;
-  border-bottom: 1px solid #e6e6e6;
-}
+/* ==========================================
+   FORMULIR KONTAK
+========================================== */
 
-#about ol {
-  padding: 8px 24px;
-  margin: 8px 0;
-  color: #333333;
-  border: 1px solid #e6e6e6;
-}
-
-/* Bagian Kontak */
-#contact {
-  padding: 20px;
-  margin: 0;
-  background-color: #f8fafc;
-  border: 1px solid #cbd5e1;
+#contact form {
+    margin-top: 15px;
 }
 
 .form-group {
-  margin: 12px 0;
+    margin-bottom: 15px;
 }
 
-fieldset.form-group {
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-}
-
-fieldset legend {
-  padding: 0 6px;
-  font-weight: bold;
-}
-
-#contact label {
-  color: #1f2937;
-  font-weight: bold;
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .input-form {
-  width: 100%;
-  max-width: 100%;
-  padding: 8px;
-  margin: 4px 0;
-  color: #111827;
-  background-color: #ffffff;
-  border: 1px solid #94a3b8;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    background-color: #ffffff;
 }
 
-#contact textarea {
-  min-height: 80px;
-  resize: vertical;
+.input-form:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 4px rgba(0, 51, 102, 0.25);
 }
 
-#contact button {
-  padding: 8px 14px;
-  margin: 8px 6px 0 0;
-  color: #ffffff;
-  background-color: #003366;
-  border: 1px solid #003366;
-  font-weight: bold;
-  cursor: pointer;
+textarea.input-form {
+    min-height: 100px;
+    resize: vertical;
 }
 
-#contact button:hover {
-  background-color: #1f4e78;
+fieldset.form-group {
+    border: 1px solid #d0d7de;
+    border-radius: 5px;
+    padding: 12px;
 }
 
-#formFeedback {
-  min-height: 1.5em;
+fieldset.form-group legend {
+    font-weight: bold;
+    padding: 0 5px;
 }
+
+fieldset.form-group input {
+    margin-right: 5px;
+}
+
+fieldset.form-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+/* ==========================================
+   TOMBOL
+========================================== */
+
+button[type="submit"],
+button[type="reset"] {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #00509e;
+}
+
+button[type="reset"] {
+    background-color: #64748b;
+}
+
+button[type="reset"]:hover {
+    background-color: #475569;
+}
+
+/* ==========================================
+   FEEDBACK FORMULIR
+========================================== */
 
 .form-feedback-error {
-  color: #c62828;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 15px;
 }
 
 .form-feedback-success {
-  color: #2e7d32;
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 15px;
 }
 
-/* Footer */
+/* ==========================================
+   P8: PEMINJAMAN FASILITAS
+========================================== */
+
+#peminjaman {
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#peminjaman h2 {
+    color: #003366;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+#peminjaman h3 {
+    color: #003366;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #dbeafe;
+    padding-bottom: 8px;
+}
+
+#peminjaman form {
+    margin-top: 20px;
+}
+
+#peminjaman .form-group {
+    margin-bottom: 18px;
+}
+
+#peminjaman label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #1e293b;
+}
+
+#peminjaman .input-form {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+}
+
+#peminjaman .input-form:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.25);
+}
+
+#peminjaman textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+#peminjaman button[type="submit"] {
+    background-color: #003366;
+}
+
+#peminjaman button[type="submit"]:hover {
+    background-color: #00509e;
+}
+
+#peminjaman button[type="reset"] {
+    background-color: #64748b;
+}
+
+#peminjaman button[type="reset"]:hover {
+    background-color: #475569;
+}
+
+#peminjaman .form-feedback-error,
+#peminjaman .form-feedback-success {
+    margin-top: 15px;
+}
+
+#peminjaman p {
+    line-height: 1.7;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
 footer {
-  padding: 14px 20px;
-  margin-top: 20px;
-  color: #ffffff;
-  background-color: #003366;
-  border: 1px solid #00264d;
-  text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px;
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
 }
 
 footer p {
-  margin: 0;
+    margin: 0;
 }
 
-/* Tampilan layar yang lebih lebar */
-@media (min-width: 768px) {
-  nav {
-    margin-top: 16px;
-  }
+/* ==========================================
+   RESPONSIVE TABLET DAN HP
+========================================== */
 
-  nav ul {
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
-  }
+@media screen and (max-width: 768px) {
 
-  #navMenu {
-    display: flex;
-    flex-direction: row;
-  }
+    body {
+        padding: 8px;
+    }
 
-  .nav-toggle {
-    display: none;
-  }
+    header {
+        padding: 15px;
+    }
 
-  main {
-    grid-template-columns: 1fr 1fr;
-  }
+    header h1 {
+        font-size: 22px;
+    }
 
-  #contact {
-    grid-column: 1 / -1;
-  }
+    .nav-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 15px;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li a {
+        background-color: #004080;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    section h2 {
+        font-size: 21px;
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE HP KECIL
+========================================== */
+
+@media screen and (max-width: 480px) {
+
+    body {
+        padding: 6px;
+    }
+
+    header {
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 19px;
+    }
+
+    section {
+        padding: 12px;
+    }
+
+    #home img {
+        width: 150px;
+    }
+
+    button[type="submit"],
+    button[type="reset"] {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    #peminjaman button {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    footer {
+        font-size: 13px;
+    }
+
 }
