@@ -22,12 +22,19 @@ if (navToggle && navMenu) {
   });
 }
 
-/* Validasi formulir kontak */
+/* Validasi JavaScript formulir Kontak */
 const contactForm = document.getElementById("contactForm");
 const formFeedback = document.getElementById("formFeedback");
 
 if (contactForm && formFeedback) {
   contactForm.addEventListener("submit", (event) => {
+    const tombol = event.submitter;
+
+    // Tombol Batal punya form tersendiri dan tidak menjalankan validasi kontak.
+    if (tombol && tombol.form && tombol.form.id === "resetKontakForm") {
+      return;
+    }
+
     formFeedback.textContent = "";
     formFeedback.className = "form-feedback-error";
 
@@ -71,17 +78,24 @@ if (contactForm && formFeedback) {
   });
 }
 
-/* Validasi formulir peminjaman fasilitas */
+/* Validasi JavaScript formulir peminjaman fasilitas */
 const peminjamanForm = document.getElementById("peminjamanForm");
 const peminjamanFeedback = document.getElementById("peminjamanFeedback");
 
 if (peminjamanForm && peminjamanFeedback) {
   peminjamanForm.addEventListener("submit", (event) => {
+    const tombol = event.submitter;
+
+    // Tombol Batal tidak menjalankan validasi peminjaman.
+    if (tombol && tombol.form && tombol.form.id === "resetPeminjamanForm") {
+      return;
+    }
+
     peminjamanFeedback.textContent = "";
     peminjamanFeedback.className = "form-feedback-error";
 
     const nama = document.getElementById("namaPenanggungJawab").value.trim();
-    const jenisFasilitas = document.getElementById("jenisFasilitas").value;
+    const fasilitas = document.getElementById("jenisFasilitas").value;
     const tanggal = document.getElementById("tanggalPeminjaman").value;
     const durasi = Number(document.getElementById("durasiPeminjaman").value);
     const keperluan = document
@@ -92,7 +106,7 @@ if (peminjamanForm && peminjamanFeedback) {
 
     if (nama.length < 3 || nama.length > 50) {
       kesalahan = "Nama penanggung jawab harus 3 sampai 50 karakter.";
-    } else if (!jenisFasilitas) {
+    } else if (!fasilitas) {
       kesalahan = "Pilih jenis fasilitas.";
     } else if (!tanggal) {
       kesalahan = "Tanggal peminjaman wajib diisi.";

@@ -35,7 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 're
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form_type'] ?? '') === 'reset_peminjaman') {
-    unset($_SESSION['peminjaman'], $_SESSION['berhasilPeminjaman']);
+    unset(
+        $_SESSION['peminjaman'],
+        $_SESSION['berhasilPeminjaman'],
+        $_SESSION['dataPeminjamanSementara'],
+        $_SESSION['kesalahanPeminjaman']
+    );
     header('Location: ' . $_SERVER['PHP_SELF'] . '#peminjaman');
     exit;
 }
@@ -59,6 +64,16 @@ $peminjaman = $_SESSION['peminjaman'] ?? [
     'keperluanPeminjaman' => '',
 ];
 
+if (isset($_SESSION['dataPeminjamanSementara'])) {
+    $peminjaman = $_SESSION['dataPeminjamanSementara'];
+    unset($_SESSION['dataPeminjamanSementara']);
+}
+
+if (isset($_SESSION['kesalahanPeminjaman'])) {
+    $kesalahanPeminjaman = $_SESSION['kesalahanPeminjaman'];
+    unset($_SESSION['kesalahanPeminjaman']);
+}
+
 if (isset($_SESSION['pesanBerhasil'])) {
     $pesanBerhasil = $_SESSION['pesanBerhasil'];
     unset($_SESSION['pesanBerhasil']);
@@ -72,7 +87,7 @@ if (isset($_SESSION['berhasilPeminjaman'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenisForm = $_POST['form_type'] ?? '';
 
-    // Peladen formulir kontak
+    // Pemrosesan peladen formulir Kontak.
     if ($jenisForm === 'contact') {
         $kontak = [
             'nama' => trim((string) ($_POST['nama'] ?? '')),
@@ -134,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Peladen formulir peminjaman fasilitas
+    // Pemrosesan peladen formulir peminjaman fasilitas.
     if ($jenisForm === 'peminjaman') {
         $peminjaman = [
             'namaPenanggungJawab' => trim((string) ($_POST['namaPenanggungJawab'] ?? '')),
@@ -167,12 +182,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $kesalahanPeminjaman = 'Durasi peminjaman minimal 1 jam.';
         } elseif ($peminjaman['keperluanPeminjaman'] === '') {
             $kesalahanPeminjaman = 'Keperluan peminjaman wajib diisi.';
-        } else {
+        }
+
+        if ($kesalahanPeminjaman === '') {
             $_SESSION['peminjaman'] = $peminjaman;
             $_SESSION['berhasilPeminjaman'] = 'Permohonan peminjaman fasilitas berhasil dikirim.';
             header('Location: ' . $_SERVER['PHP_SELF'] . '#peminjaman');
             exit;
         }
+
+        // Simpan data dan pesan validasi supaya tetap tampil setelah redirect.
+        $_SESSION['dataPeminjamanSementara'] = $peminjaman;
+        $_SESSION['kesalahanPeminjaman'] = $kesalahanPeminjaman;
+        header('Location: ' . $_SERVER['PHP_SELF'] . '#peminjaman');
+        exit;
     }
 }
 
@@ -238,7 +261,6 @@ $minatKontak = is_array($kontak['minat']) ? $kontak['minat'] : [];
             </ol>
         </section>
 
-        <!-- Formulir baru ditempatkan sebelum section Kontak -->
         <section id="peminjaman">
             <h2>Permohonan Peminjaman Fasilitas Kampus</h2>
 
