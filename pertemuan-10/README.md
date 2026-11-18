@@ -20,17 +20,21 @@
    | pesan | VARCHAR(300) | Menyimpan isi pesan, maksimal 300 karakter. | 8. Primary Key dan AUTO_INCREMENT
    | Atribut | Tipe Data | Ketentuan | Keterangan |
    |---|---|---|---|
-   | id | INT | PRIMARY KEY, AUTO_INCREMENT | Identitas unik setiap data kontak. |
-   9. Rancangan Akhir Struktur Tabel
-
-| No. | Atribut     | Tipe Data    | Ketentuan                   |
-| --: | ----------- | ------------ | --------------------------- |
-|   1 | id          | INT          | PRIMARY KEY, AUTO_INCREMENT |
-|   2 | nama        | VARCHAR(50)  | -                           |
-|   3 | email       | VARCHAR(255) | -                           |
-|   4 | semester    | TINYINT      | -                           |
-|   5 | tanggal     | DATE         | -                           |
-|   6 | jenis_pesan | VARCHAR(20)  | -                           |
-|   7 | minat       | VARCHAR(50)  | -                           |
-|   8 | prodi       | VARCHAR(2)   | -                           |
-|   9 | pesan       | VARCHAR(300) | -                           |
+   | id | INT | PRIMARY KEY, AUTO_INCREMENT | Identitas unik setiap data kontak. | 9. Rancangan Akhir Struktur Tabel
+   | No. | Atribut | Tipe Data | Ketentuan |
+   | --: | ----------- | ------------ | --------------------------- |
+   | 1 | id | INT | PRIMARY KEY, AUTO_INCREMENT |
+   | 2 | nama | VARCHAR(50) | - |
+   | 3 | email | VARCHAR(255) | - |
+   | 4 | semester | TINYINT | - |
+   | 5 | tanggal | DATE | - |
+   | 6 | jenis_pesan | VARCHAR(20) | - |
+   | 7 | minat | VARCHAR(50) | - |
+   | 8 | prodi | VARCHAR(2) | - |
+   | 9 | pesan | VARCHAR(300) | - |
+8. Perintah DDL CREATE DATABASE dan CREATE TABLE
+   CREATE DATABASE digunakan untuk membuat basis data. USE digunakan untuk memilih basis data.
+   CREATE TABLE digunakan untuk membuat tabel beserta atributnya.
+   Nama basis data yang diperiksa: db_pwd_2611500061
+   Nama tabel yang diperiksa: tbl_kontak_2611500061
+   Nama basis data, nama tabel, dan sembilan atribut pada rancangan SQL telah dicocokkan dengan struktur yang dibuat melalui phpMyAdmin.
