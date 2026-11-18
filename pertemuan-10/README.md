@@ -51,3 +51,8 @@
 12. Pemeriksaan Berkas Hasil Ekspor
     Berkas `db_pwd_2611500061.sql` diperiksa. Perintah CREATE TABLE memuat struktur tabel `tbl_kontak_2611500061` dengan sembilan kolom.
     Perintah INSERT INTO memuat data awal yang sesuai dengan data pada tab Browse.
+13. Pemeriksaan Akhir P10
+    Basis data: `db_pwd_2611500061`
+    Tabel: `tbl_kontak_2611500061`
+    Tabel memiliki sembilan kolom. Kolom `id` menggunakan `PRIMARY KEY` dan `AUTO_INCREMENT`. Data awal telah diperiksa melalui tab Browse.
+    Berkas ekspor: `db_pwd_2611500061.sql`

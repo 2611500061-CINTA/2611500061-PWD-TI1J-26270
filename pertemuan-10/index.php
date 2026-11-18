@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . '/fungsi.php';
 session_start();
+require_once __DIR__ . '/fungsi.php';
 
 // Mengambil data formulir dari session.
 $formData = $_SESSION['formData'] ?? [];
@@ -30,7 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? ''));
     $prodi = trim((string) ($_POST['prodi'] ?? ''));
     $pesan = trim((string) ($_POST['pesan'] ?? ''));
+
+    // Checkbox dapat mengirimkan lebih dari satu nilai.
     $minat = $_POST['minat'] ?? [];
+
+    if (!is_array($minat)) {
+        $minat = [];
+    }
 
     $dataFormulir = [
         'nama' => $nama,
@@ -45,14 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pesanKesalahan = validasiFormulir($dataFormulir);
 
-    if (!is_array($minat)) {
-        $minat = [];
-        $dataFormulir['minat'] = $minat;
-    }
-
     $_SESSION['pesanKesalahan'] = $pesanKesalahan;
     $_SESSION['formData'] = $dataFormulir;
 
+    // PRG: mengarahkan kembali ke halaman sebelum menghasilkan keluaran HTML.
     header('Location: index.php');
     exit;
 }
@@ -84,46 +86,46 @@ $dataHasilKontak = [
 ];
 
 // Data profil mahasiswa.
-$nim = "2611500061";
-$namaMahasiswa = "Cinta bunda feliani";
-$programStudi = "TI";
-$tahunAkademik = "2026/2027";
+$nim = '2611500061';
+$namaMahasiswa = 'Cinta bunda feliani';
+$programStudi = 'TI';
+$tahunAkademik = '2026/2027';
 $semester = 2;
 $ipk = 3.75;
 $statusAktif = true;
 $catatanTambahan = null;
 
-const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "satpamal";
+const NAMA_MATA_KULIAH = 'Pemrograman Web Dasar';
+const PROFIL_GITHUB = 'satpamal';
 
 $batasSemester = 8;
 $sisaSemester = hitungSisaSemester($semester, $batasSemester);
 $semesterValid = $semester >= 1 && $semester <= $batasSemester;
 
 $statusSemester = ($semesterValid && $statusAktif)
-    ? "Sesuai rentang"
-    : "Perlu diperiksa";
+    ? 'Sesuai rentang'
+    : 'Perlu diperiksa';
 
 $keteranganSemester = tentukanKategoriSemester($semester);
 
-$namaProdi = ($programStudi == "SI")
-    ? "Sistem Informasi"
-    : (($programStudi == "TI") ? "Teknik Informatika" : "Lainnya");
+$namaProdi = ($programStudi == 'SI')
+    ? 'Sistem Informasi'
+    : (($programStudi == 'TI') ? 'Teknik Informatika' : 'Lainnya');
 
 switch ($programStudi) {
-    case "SI":
-        $fokusProgramStudi = "Sistem informasi dan proses bisnis";
+    case 'SI':
+        $fokusProgramStudi = 'Sistem informasi dan proses bisnis';
         break;
 
-    case "TI":
-        $fokusProgramStudi = "Komputasi dan pengembangan perangkat lunak";
+    case 'TI':
+        $fokusProgramStudi = 'Komputasi dan pengembangan perangkat lunak';
         break;
 
     default:
-        $fokusProgramStudi = "Belum ditentukan";
+        $fokusProgramStudi = 'Belum ditentukan';
 }
 
-$teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
+$teksStatus = $statusAktif ? 'Aktif' : 'Tidak aktif';
 
 $dataProfil = [
     'Nama' => $namaMahasiswa,
@@ -131,7 +133,6 @@ $dataProfil = [
     'Jurusan' => $namaProdi
 ];
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -231,7 +232,7 @@ $dataProfil = [
                 <p>
                     Catatan tambahan:
                     <?= $catatanTambahan === null
-                        ? "Belum ada"
+                        ? 'Belum ada'
                         : bersihkan($catatanTambahan) ?>
                 </p>
 
@@ -251,30 +252,30 @@ $dataProfil = [
                 <ol>
                     <?php
                     for ($i = 1; $i <= 5; $i++) {
-                        echo "<li>Target belajar ke-" . $i . ": ";
+                        echo '<li>Target belajar ke-' . $i . ': ';
 
                         switch ($i) {
                             case 1:
-                                echo "Memahami sintaks dasar PHP.";
+                                echo 'Memahami sintaks dasar PHP.';
                                 break;
 
                             case 2:
-                                echo "Menggunakan variabel dan konstanta.";
+                                echo 'Menggunakan variabel dan konstanta.';
                                 break;
 
                             case 3:
-                                echo "Menerapkan operator dan percabangan.";
+                                echo 'Menerapkan operator dan percabangan.';
                                 break;
 
                             case 4:
-                                echo "Menggunakan perulangan for dan while.";
+                                echo 'Menggunakan perulangan for dan while.';
                                 break;
 
                             default:
-                                echo "Belum dipetakan.";
+                                echo 'Belum dipetakan.';
                         }
 
-                        echo "</li>";
+                        echo '</li>';
                     }
                     ?>
                 </ol>
@@ -286,7 +287,7 @@ $dataProfil = [
                     $nomorSemester = 1;
 
                     while ($nomorSemester <= 3) {
-                        echo "<li>Semester " . $nomorSemester . "</li>";
+                        echo '<li>Semester ' . $nomorSemester . '</li>';
                         $nomorSemester++;
                     }
                     ?>
@@ -296,18 +297,18 @@ $dataProfil = [
 
                 <p>
                     Menampilkan HTML:
-                    <?= "hai <b>sayang</b> kamu" ?>
+                    <?= 'hai <b>sayang</b> kamu' ?>
                 </p>
 
                 <p>
                     Membersihkan teks:
-                    <?= bersihkan("hai <b>sayang</b> kamu") ?>
+                    <?= bersihkan('hai <b>sayang</b> kamu') ?>
                 </p>
 
                 <p>
                     Contoh array:
                     <?php
-                    $contohArray = ["defi", "cinta", "bunda", "feliani"];
+                    $contohArray = ['defi', 'cinta', 'bunda', 'feliani'];
                     echo bersihkan($contohArray[0]);
                     ?>
                 </p>
@@ -335,6 +336,8 @@ $dataProfil = [
 
             <form
                 id="contactForm"
+                class="js-contact-form"
+                data-validation="contact"
                 action="index.php"
                 method="post"
                 novalidate>
@@ -463,7 +466,11 @@ $dataProfil = [
                         required><?= bersihkan($pesan) ?></textarea>
                 </div>
 
-                <p id="formFeedback" aria-live="polite"></p>
+                <p
+                    id="formFeedback"
+                    class="form-feedback"
+                    data-form-feedback
+                    aria-live="polite"></p>
 
                 <button type="submit">Kirim</button>
                 <button type="reset">Batal</button>
@@ -507,7 +514,7 @@ $dataProfil = [
 
     <footer>
         <p>
-            © <?= date("Y") ?>
+            © <?= date('Y') ?>
             <?= bersihkan($namaMahasiswa) ?>
             [<?= bersihkan($nim) ?>]
         </p>
