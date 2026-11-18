@@ -38,3 +38,7 @@
    Nama basis data yang diperiksa: db_pwd_2611500061
    Nama tabel yang diperiksa: tbl_kontak_2611500061
    Nama basis data, nama tabel, dan sembilan atribut pada rancangan SQL telah dicocokkan dengan struktur yang dibuat melalui phpMyAdmin.
+9. Perintah SQL INSERT
+   Perintah INSERT digunakan untuk menambahkan data ke dalam tabel.
+   Atribut id tidak dicantumkan karena nilainya dibuat otomatis melalui AUTO_INCREMENT.
+   Data awal telah dimasukkan melalui fasilitas Insert pada phpMyAdmin.
