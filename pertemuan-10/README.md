@@ -48,4 +48,6 @@
     Basis data: `db_pwd_2611500061`
     Export method: Quick
     Format: SQL
-12.
+12. Pemeriksaan Berkas Hasil Ekspor
+    Berkas `db_pwd_2611500061.sql` diperiksa. Perintah CREATE TABLE memuat struktur tabel `tbl_kontak_2611500061` dengan sembilan kolom.
+    Perintah INSERT INTO memuat data awal yang sesuai dengan data pada tab Browse.
