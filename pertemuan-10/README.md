@@ -42,3 +42,5 @@
    Perintah INSERT digunakan untuk menambahkan data ke dalam tabel.
    Atribut id tidak dicantumkan karena nilainya dibuat otomatis melalui AUTO_INCREMENT.
    Data awal telah dimasukkan melalui fasilitas Insert pada phpMyAdmin.
+10. Pemeriksaan Kesesuaian Data
+    Data diperiksa melalui tab Browse. Kolom jenis pesan diperbaiki menjadi `jenis_pesan` sesuai rancangan. Data yang tersimpan memiliki id 1, nama Andi, email andi@example.com, semester 2, tanggal 2026-11-19, jenis pesan pertanyaan, minat HTML dan CSS, prodi TI, serta pesan "Saya ingin belajar pemrograman web.".
