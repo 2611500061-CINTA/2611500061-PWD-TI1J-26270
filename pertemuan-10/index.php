@@ -2,9 +2,7 @@
 include_once __DIR__ . '/fungsi.php';
 session_start();
 
-// ==========================================
-// G.2: MENGAMBIL DATA SESSION
-// ==========================================
+// Mengambil data formulir dari session.
 $formData = $_SESSION['formData'] ?? [];
 
 $nama = $formData['nama'] ?? '';
@@ -23,11 +21,8 @@ if (!is_array($minat)) {
 $pesanKesalahan = $_SESSION['pesanKesalahan'] ?? '';
 unset($_SESSION['pesanKesalahan']);
 
-// ==========================================
-// F.2 - F.4: VALIDASI FORMULIR
-// ==========================================
+// Memproses dan memvalidasi formulir.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $nama = trim((string) ($_POST['nama'] ?? ''));
     $email = trim((string) ($_POST['email'] ?? ''));
     $semesterForm = trim((string) ($_POST['semester'] ?? ''));
@@ -37,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pesan = trim((string) ($_POST['pesan'] ?? ''));
     $minat = $_POST['minat'] ?? [];
 
-    // Data formulir dibentuk sebagai larik asosiatif.
     $dataFormulir = [
         'nama' => $nama,
         'email' => $email,
@@ -49,30 +43,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'pesan' => $pesan
     ];
 
-    // Validasi formulir dipisahkan ke fungsi reusable di fungsi.php.
     $pesanKesalahan = validasiFormulir($dataFormulir);
 
-    // Pastikan data minat tersimpan sebagai larik terindeks.
     if (!is_array($minat)) {
         $minat = [];
         $dataFormulir['minat'] = $minat;
     }
 
-    // ==========================================
-    // P9: MENYIMPAN DATA KE SESSION
-    // ==========================================
     $_SESSION['pesanKesalahan'] = $pesanKesalahan;
-
     $_SESSION['formData'] = $dataFormulir;
 
-    // Redirect setelah formulir diproses
     header('Location: index.php');
     exit;
 }
 
-// ==========================================
-// MENGAMBIL KEMBALI DATA SESSION
-// ==========================================
+// Mengambil kembali data formulir dari session.
 $formData = $_SESSION['formData'] ?? [];
 
 $nama = $formData['nama'] ?? '';
@@ -81,14 +66,13 @@ $semesterForm = $formData['semester'] ?? '';
 $tanggal = $formData['tanggal'] ?? '';
 $jenisPesan = $formData['jenis_pesan'] ?? '';
 $prodi = $formData['prodi'] ?? '';
-$minat = $formData['minat'] ?? [];
 $pesan = $formData['pesan'] ?? '';
+$minat = $formData['minat'] ?? [];
 
 if (!is_array($minat)) {
     $minat = [];
 }
 
-// Larik asosiatif data formulir yang akan ditampilkan dengan foreach.
 $dataHasilKontak = [
     'Nama' => $nama,
     'Email' => $email,
@@ -99,9 +83,7 @@ $dataHasilKontak = [
     'Pesan' => $pesan
 ];
 
-// ==========================================
-// P6: PHP DASAR DAN PEMROGRAMAN PELADEN
-// ==========================================
+// Data profil mahasiswa.
 $nim = "2611500061";
 $namaMahasiswa = "Cinta bunda feliani";
 $programStudi = "TI";
@@ -116,7 +98,6 @@ const PROFIL_GITHUB = "satpamal";
 
 $batasSemester = 8;
 $sisaSemester = hitungSisaSemester($semester, $batasSemester);
-
 $semesterValid = $semester >= 1 && $semester <= $batasSemester;
 
 $statusSemester = ($semesterValid && $statusAktif)
@@ -144,13 +125,11 @@ switch ($programStudi) {
 
 $teksStatus = $statusAktif ? "Aktif" : "Tidak aktif";
 
-// Larik asosiatif untuk menampilkan data profil secara terstruktur.
 $dataProfil = [
     'Nama' => $namaMahasiswa,
     'NIM' => $nim,
     'Jurusan' => $namaProdi
 ];
-
 ?>
 
 <!DOCTYPE html>
@@ -159,18 +138,13 @@ $dataProfil = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Profil Mahasiswa</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <header>
-
         <div class="header-top">
-
             <h1>Profil Mahasiswa</h1>
 
             <button
@@ -182,38 +156,26 @@ $dataProfil = [
                 aria-expanded="false">
                 ☰
             </button>
-
         </div>
 
         <nav aria-label="Navigasi utama">
-
             <ul id="navMenu">
                 <li><a href="#home">Beranda</a></li>
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
-
         </nav>
-
     </header>
 
     <main>
-
-        <!-- ==================================
-             HOME
-        ================================== -->
-
         <section id="home">
-
             <h2>Selamat Datang</h2>
 
             <p>
                 Halo, saya
                 <strong><?= bersihkan($namaMahasiswa) ?></strong>.
-
                 Saya sedang mempelajari mata kuliah
                 <strong><?= bersihkan(NAMA_MATA_KULIAH) ?></strong>
-
                 pada tahun akademik
                 <?= bersihkan($tahunAkademik) ?>.
             </p>
@@ -221,19 +183,12 @@ $dataProfil = [
             <img
                 src="img/foto-profil.jpg"
                 alt="Foto profil Cinta Bunda Feliani">
-
         </section>
 
-        <!-- ==================================
-             ABOUT
-        ================================== -->
-
         <section id="about">
-
             <h2>Tentang Saya</h2>
 
             <article>
-
                 <h3>Profil Singkat</h3>
 
                 <p>
@@ -281,22 +236,21 @@ $dataProfil = [
                 </p>
 
                 <h3>Data Profil (Larik Asosiatif dan foreach)</h3>
-                <dl>
-                    <?php foreach ($dataProfil as $label => $nilai): ?>
-                        <dt><?= bersihkan($label) ?></dt>
-                        <dd><?= bersihkan($nilai) ?></dd>
-                    <?php endforeach; ?>
-                </dl>
 
-                <!-- Perulangan FOR -->
+                <table class="tabel-profil">
+                    <?php foreach ($dataProfil as $label => $nilai): ?>
+                        <tr>
+                            <th><?= bersihkan($label) ?></th>
+                            <td><?= bersihkan($nilai) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
 
                 <h3>Target Belajar (Perulangan for)</h3>
 
                 <ol>
-
                     <?php
                     for ($i = 1; $i <= 5; $i++) {
-
                         echo "<li>Target belajar ke-" . $i . ": ";
 
                         switch ($i) {
@@ -323,29 +277,20 @@ $dataProfil = [
                         echo "</li>";
                     }
                     ?>
-
                 </ol>
-
-                <!-- Perulangan WHILE -->
 
                 <h3>Semester (Perulangan while)</h3>
 
                 <ol>
-
                     <?php
                     $nomorSemester = 1;
 
                     while ($nomorSemester <= 3) {
-
                         echo "<li>Semester " . $nomorSemester . "</li>";
-
                         $nomorSemester++;
                     }
                     ?>
-
                 </ol>
-
-                <!-- Contoh fungsi PHP -->
 
                 <h3>Contoh Fungsi PHP</h3>
 
@@ -366,25 +311,16 @@ $dataProfil = [
                     echo bersihkan($contohArray[0]);
                     ?>
                 </p>
-
             </article>
-
         </section>
 
-        <!-- ==================================
-             CONTACT
-        ================================== -->
-
         <section id="contact">
-
             <h2>Kontak</h2>
 
             <?php if ($pesanKesalahan !== ''): ?>
-
                 <p class="form-feedback-error" role="alert">
                     <?= bersihkan($pesanKesalahan) ?>
                 </p>
-
             <?php endif; ?>
 
             <p>
@@ -397,8 +333,6 @@ $dataProfil = [
                 </a>.
             </p>
 
-            <!-- FORMULIR KONTAK -->
-
             <form
                 id="contactForm"
                 action="index.php"
@@ -406,9 +340,7 @@ $dataProfil = [
                 novalidate>
 
                 <div class="form-group">
-
                     <label for="nama">Nama Lengkap</label>
-
                     <input
                         class="input-form"
                         type="text"
@@ -419,13 +351,10 @@ $dataProfil = [
                         maxlength="50"
                         value="<?= bersihkan($nama) ?>"
                         required>
-
                 </div>
 
                 <div class="form-group">
-
                     <label for="email">Email</label>
-
                     <input
                         class="input-form"
                         type="email"
@@ -434,13 +363,10 @@ $dataProfil = [
                         placeholder="nama@email.com"
                         value="<?= bersihkan($email) ?>"
                         required>
-
                 </div>
 
                 <div class="form-group">
-
                     <label for="semester">Semester</label>
-
                     <input
                         class="input-form"
                         type="number"
@@ -450,13 +376,10 @@ $dataProfil = [
                         min="1"
                         max="14"
                         required>
-
                 </div>
 
                 <div class="form-group">
-
                     <label for="tanggal">Tanggal Kunjungan</label>
-
                     <input
                         class="input-form"
                         type="date"
@@ -464,11 +387,9 @@ $dataProfil = [
                         name="tanggal"
                         value="<?= bersihkan($tanggal) ?>"
                         required>
-
                 </div>
 
                 <fieldset class="form-group">
-
                     <legend>Jenis Pesan</legend>
 
                     <input
@@ -478,7 +399,6 @@ $dataProfil = [
                         value="pertanyaan"
                         <?= $jenisPesan === 'pertanyaan' ? 'checked' : '' ?>
                         required>
-
                     <label for="pertanyaan">Pertanyaan</label>
 
                     <input
@@ -487,13 +407,10 @@ $dataProfil = [
                         name="jenis_pesan"
                         value="saran"
                         <?= $jenisPesan === 'saran' ? 'checked' : '' ?>>
-
                     <label for="saran">Saran</label>
-
                 </fieldset>
 
                 <fieldset class="form-group">
-
                     <legend>Topik yang Diminati</legend>
 
                     <input
@@ -502,7 +419,6 @@ $dataProfil = [
                         name="minat[]"
                         value="HTML"
                         <?= in_array('HTML', $minat, true) ? 'checked' : '' ?>>
-
                     <label for="minat-html">HTML</label>
 
                     <input
@@ -511,13 +427,10 @@ $dataProfil = [
                         name="minat[]"
                         value="CSS"
                         <?= in_array('CSS', $minat, true) ? 'checked' : '' ?>>
-
                     <label for="minat-css">CSS</label>
-
                 </fieldset>
 
                 <div class="form-group">
-
                     <label for="prodi">Program Studi</label>
 
                     <select
@@ -525,31 +438,22 @@ $dataProfil = [
                         id="prodi"
                         name="prodi"
                         required>
-
-                        <option value="">
-                            -- Pilih Program Studi --
-                        </option>
-
+                        <option value="">-- Pilih Program Studi --</option>
                         <option
                             value="SI"
                             <?= $prodi === 'SI' ? 'selected' : '' ?>>
                             Sistem Informasi
                         </option>
-
                         <option
                             value="TI"
                             <?= $prodi === 'TI' ? 'selected' : '' ?>>
                             Teknik Informatika
                         </option>
-
                     </select>
-
                 </div>
 
                 <div class="form-group">
-
                     <label for="pesan">Pesan</label>
-
                     <textarea
                         class="input-form"
                         id="pesan"
@@ -557,23 +461,15 @@ $dataProfil = [
                         maxlength="300"
                         placeholder="Tulis pesan Anda"
                         required><?= bersihkan($pesan) ?></textarea>
-
                 </div>
 
                 <p id="formFeedback" aria-live="polite"></p>
 
                 <button type="submit">Kirim</button>
-
                 <button type="reset">Batal</button>
-
             </form>
 
-            <!-- ==================================
-                 DATA YANG DITERIMA PELADEN
-            ================================== -->
-
             <?php if (!empty($nama)): ?>
-
                 <article
                     id="hasilKontak"
                     class="submission-result"
@@ -584,6 +480,7 @@ $dataProfil = [
                     <?php foreach ($dataHasilKontak as $label => $nilai): ?>
                         <p>
                             <strong><?= bersihkan($label) ?>:</strong>
+
                             <?php if ($label === 'Pesan'): ?>
                                 <?= nl2br(bersihkan($nilai)) ?>
                             <?php else: ?>
@@ -592,52 +489,31 @@ $dataProfil = [
                         </p>
                     <?php endforeach; ?>
 
-                    <p>
-                        <strong>Topik yang Diminati:</strong>
-                    </p>
+                    <p><strong>Topik yang Diminati:</strong></p>
 
                     <?php if (count($minat) > 0): ?>
-
                         <ul>
-
                             <?php foreach ($minat as $topik): ?>
-
                                 <li><?= bersihkan($topik) ?></li>
-
                             <?php endforeach; ?>
-
                         </ul>
-
                     <?php else: ?>
-
                         <p>Tidak ada minat yang dipilih.</p>
-
                     <?php endif; ?>
-
                 </article>
-
             <?php endif; ?>
-
         </section>
-
     </main>
 
-    <!-- ==================================
-         FOOTER
-    ================================== -->
-
     <footer>
-
         <p>
             © <?= date("Y") ?>
             <?= bersihkan($namaMahasiswa) ?>
             [<?= bersihkan($nim) ?>]
         </p>
-
     </footer>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>
