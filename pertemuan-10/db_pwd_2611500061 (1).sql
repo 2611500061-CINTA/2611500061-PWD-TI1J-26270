@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 18, 2026 at 06:14 PM
+-- Generation Time: Nov 23, 2026 at 02:00 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.33
 
@@ -44,7 +44,7 @@ CREATE TABLE `tbl_kontak_2611500061` (
 --
 
 INSERT INTO `tbl_kontak_2611500061` (`id`, `nama`, `email`, `semester`, `tanggal`, `jenis_ pesan`, `minat`, `prodi`, `pesan`) VALUES
-(1, 'andi', 'andi@example.com', 2, '2026-11-19', 'pertanyaan', 'HTML, CSS', 'TI', 'Saya ingin belajar pemrograman web.');
+(1, 'Cinta bunda feliani', '2611500061@mahasiswa.atmaluhur.ac.id', 2, '2026-11-19', 'pertanyaan', 'HTML, CSS', 'TI', 'Saya ingin belajar pemrograman web.');
 
 --
 -- Indexes for dumped tables
