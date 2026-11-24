@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['pesanKesalahan'] = $pesanKesalahan;
     $_SESSION['formData'] = $dataFormulir;
 
-    // PRG: mengarahkan kembali ke halaman sebelum menghasilkan keluaran HTML.
+    // PRG: kembali ke halaman sebelum menghasilkan keluaran HTML.
     header('Location: index.php');
     exit;
 }
@@ -74,16 +74,6 @@ $minat = $formData['minat'] ?? [];
 if (!is_array($minat)) {
     $minat = [];
 }
-
-$dataHasilKontak = [
-    'Nama' => $nama,
-    'Email' => $email,
-    'Semester' => $semesterForm,
-    'Tanggal Kunjungan' => $tanggal,
-    'Jenis Pesan' => $jenisPesan,
-    'Program Studi' => $prodi,
-    'Pesan' => $pesan
-];
 
 // Data profil mahasiswa.
 $nim = '2611500061';
@@ -108,9 +98,9 @@ $statusSemester = ($semesterValid && $statusAktif)
 
 $keteranganSemester = tentukanKategoriSemester($semester);
 
-$namaProdi = ($programStudi == 'SI')
+$namaProdi = ($programStudi === 'SI')
     ? 'Sistem Informasi'
-    : (($programStudi == 'TI') ? 'Teknik Informatika' : 'Lainnya');
+    : (($programStudi === 'TI') ? 'Teknik Informatika' : 'Lainnya');
 
 switch ($programStudi) {
     case 'SI':
@@ -132,6 +122,24 @@ $dataProfil = [
     'NIM' => $nim,
     'Jurusan' => $namaProdi
 ];
+
+// Menghubungkan PHP dengan MySQL.
+require_once __DIR__ . '/koneksi.php';
+
+// Mengambil data kontak dari tabel menggunakan operasi READ.
+$sql = "SELECT * FROM tbl_kontak_2611500061";
+$hasil = mysqli_query($koneksi, $sql);
+
+if (!$hasil) {
+    die("Kueri SELECT gagal dijalankan.");
+}
+
+// Mengambil seluruh hasil kueri sebagai larik asosiatif.
+$dataKontak = [];
+
+while ($baris = mysqli_fetch_assoc($hasil)) {
+    $dataKontak[] = $baris;
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -194,7 +202,7 @@ $dataProfil = [
 
                 <p>
                     Sisa semester hingga batas:
-                    <?= $sisaSemester ?>
+                    <?= bersihkan($sisaSemester) ?>
                 </p>
 
                 <p>
@@ -204,7 +212,7 @@ $dataProfil = [
 
                 <p>
                     Semester:
-                    <?= $semester ?>
+                    <?= bersihkan($semester) ?>
                     (<?= bersihkan($keteranganSemester) ?>)
                 </p>
 
@@ -476,45 +484,64 @@ $dataProfil = [
                 <button type="reset">Batal</button>
             </form>
 
-            <?php if (!empty($nama)): ?>
-                <article
-                    id="hasilKontak"
-                    class="submission-result"
-                    aria-live="polite">
+            <article
+                id="hasilKontak"
+                class="submission-result"
+                aria-live="polite">
 
-                    <h3>Data yang Diterima Peladen</h3>
+                <h3>Data Kontak dari Basis Data</h3>
 
-                    <?php foreach ($dataHasilKontak as $label => $nilai): ?>
-                        <p>
-                            <strong><?= bersihkan($label) ?>:</strong>
-
-                            <?php if ($label === 'Pesan'): ?>
-                                <?= nl2br(bersihkan($nilai)) ?>
-                            <?php else: ?>
-                                <?= bersihkan($nilai) ?>
-                            <?php endif; ?>
-                        </p>
+                <?php if (count($dataKontak) > 0): ?>
+                    <?php foreach ($dataKontak as $data): ?>
+                        <section>
+                            <p>
+                                <strong>ID:</strong>
+                                <?= bersihkan($data['id']) ?>
+                            </p>
+                            <p>
+                                <strong>Nama:</strong>
+                                <?= bersihkan($data['nama']) ?>
+                            </p>
+                            <p>
+                                <strong>Email:</strong>
+                                <?= bersihkan($data['email']) ?>
+                            </p>
+                            <p>
+                                <strong>Semester:</strong>
+                                <?= bersihkan($data['semester']) ?>
+                            </p>
+                            <p>
+                                <strong>Tanggal Kunjungan:</strong>
+                                <?= bersihkan($data['tanggal']) ?>
+                            </p>
+                            <p>
+                                <strong>Jenis Pesan:</strong>
+                                <?= bersihkan($data['jenis_pesan']) ?>
+                            </p>
+                            <p>
+                                <strong>Topik yang Diminati:</strong>
+                                <?= bersihkan($data['minat']) ?>
+                            </p>
+                            <p>
+                                <strong>Program Studi:</strong>
+                                <?= bersihkan($data['prodi']) ?>
+                            </p>
+                            <p>
+                                <strong>Pesan:</strong>
+                                <?= nl2br(bersihkan($data['pesan'])) ?>
+                            </p>
+                        </section>
                     <?php endforeach; ?>
-
-                    <p><strong>Topik yang Diminati:</strong></p>
-
-                    <?php if (count($minat) > 0): ?>
-                        <ul>
-                            <?php foreach ($minat as $topik): ?>
-                                <li><?= bersihkan($topik) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
-                        <p>Tidak ada minat yang dipilih.</p>
-                    <?php endif; ?>
-                </article>
-            <?php endif; ?>
+                <?php else: ?>
+                    <p>Belum ada data kontak yang tersimpan.</p>
+                <?php endif; ?>
+            </article>
         </section>
     </main>
 
     <footer>
         <p>
-            © <?= date('Y') ?>
+            &copy; <?= date('Y') ?>
             <?= bersihkan($namaMahasiswa) ?>
             [<?= bersihkan($nim) ?>]
         </p>
