@@ -18,3 +18,5 @@
 - `mysqli_report(MYSQLI_REPORT_OFF);` sudah ditulis setelah parameter koneksi pada `koneksi.php`.
 - `mysqli_connect()` menggunakan parameter host, username, password, dan database.
 - Jika koneksi gagal, aplikasi menampilkan pesan `Koneksi ke basis data gagal.`
+- File sementara `uji_koneksi.php` menampilkan pesan “Koneksi ke basis data berhasil.”
+- Setelah pengujian, file sementara tersebut dihapus.
