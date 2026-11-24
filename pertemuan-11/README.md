@@ -16,3 +16,5 @@
 - Database: `db_pwd_2611500061`
 - Nama database sesuai dengan database yang tersedia di phpMyAdmin.
 - `mysqli_report(MYSQLI_REPORT_OFF);` sudah ditulis setelah parameter koneksi pada `koneksi.php`.
+- `mysqli_connect()` menggunakan parameter host, username, password, dan database.
+- Jika koneksi gagal, aplikasi menampilkan pesan `Koneksi ke basis data gagal.`
