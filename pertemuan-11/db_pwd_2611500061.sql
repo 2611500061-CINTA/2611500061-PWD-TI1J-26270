@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 23, 2026 at 02:00 PM
+-- Generation Time: Nov 24, 2026 at 03:41 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.33
 
@@ -33,7 +33,7 @@ CREATE TABLE `tbl_kontak_2611500061` (
   `email` varchar(255) NOT NULL,
   `semester` tinyint NOT NULL,
   `tanggal` date NOT NULL,
-  `jenis_ pesan` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `jenis_pesan` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `minat` varchar(50) NOT NULL,
   `prodi` varchar(2) NOT NULL,
   `pesan` varchar(300) NOT NULL
@@ -43,7 +43,7 @@ CREATE TABLE `tbl_kontak_2611500061` (
 -- Dumping data for table `tbl_kontak_2611500061`
 --
 
-INSERT INTO `tbl_kontak_2611500061` (`id`, `nama`, `email`, `semester`, `tanggal`, `jenis_ pesan`, `minat`, `prodi`, `pesan`) VALUES
+INSERT INTO `tbl_kontak_2611500061` (`id`, `nama`, `email`, `semester`, `tanggal`, `jenis_pesan`, `minat`, `prodi`, `pesan`) VALUES
 (1, 'Cinta bunda feliani', '2611500061@mahasiswa.atmaluhur.ac.id', 2, '2026-11-19', 'pertanyaan', 'HTML, CSS', 'TI', 'Saya ingin belajar pemrograman web.');
 
 --
