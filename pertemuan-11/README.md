@@ -20,3 +20,5 @@
 - Jika koneksi gagal, aplikasi menampilkan pesan `Koneksi ke basis data gagal.`
 - File sementara `uji_koneksi.php` menampilkan pesan “Koneksi ke basis data berhasil.”
 - Setelah pengujian, file sementara tersebut dihapus.
+- `index.php` memuat `koneksi.php` menggunakan `require_once()`.
+- Kedua berkas berada di folder `pertemuan-11`.
