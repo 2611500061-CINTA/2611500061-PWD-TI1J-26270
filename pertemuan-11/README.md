@@ -15,3 +15,4 @@
 - Password: kosong
 - Database: `db_pwd_2611500061`
 - Nama database sesuai dengan database yang tersedia di phpMyAdmin.
+- `mysqli_report(MYSQLI_REPORT_OFF);` sudah ditulis setelah parameter koneksi pada `koneksi.php`.
