@@ -28,3 +28,6 @@
 - `index.php` menggunakan `SELECT * FROM tbl_kontak_2611500061` untuk mengambil data dari tabel kontak.
 - Kueri dijalankan menggunakan `mysqli_query($koneksi, $sql)` dan hasilnya disimpan pada `$hasil`.
 - Hasil kueri diambil dengan `mysqli_fetch_assoc()` dan setiap baris disimpan dalam larik `$dataKontak`.
+- Data kontak dari tabel `tbl_kontak_2611500061` berhasil ditampilkan pada halaman P11.
+- Saat tabel dikosongkan, aplikasi menampilkan pesan “Belum ada data kontak yang tersimpan.”
+- Data awal dimasukkan kembali dan berhasil tampil pada halaman aplikasi.
