@@ -124,9 +124,6 @@ $dataProfil = [
     'Jurusan' => $namaProdi
 ];
 
-// Menghubungkan PHP dengan MySQL.
-require_once __DIR__ . '/koneksi.php';
-
 // Mengambil data kontak dari tabel menggunakan operasi READ.
 $sql = "SELECT * FROM tbl_kontak_2611500061";
 $hasil = mysqli_query($koneksi, $sql);

@@ -14,6 +14,8 @@ if (navToggle && navMenu) {
 }
 
 // Validasi formulir Kontak.
+// Selector menggunakan atribut/class, bukan ID formulir tertentu,
+// sehingga formulir lain dapat ditambahkan dengan ID yang berbeda.
 const contactForms = document.querySelectorAll(
   'form[data-validation="contact"]',
 );

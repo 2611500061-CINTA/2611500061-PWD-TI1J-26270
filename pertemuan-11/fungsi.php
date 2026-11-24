@@ -1,9 +1,13 @@
 <?php
 
-/** Membersihkan teks sebelum ditampilkan ke dalam HTML. */
 function bersihkan($teks)
 {
-  return htmlspecialchars((string) $teks, ENT_QUOTES, 'UTF-8');
+  return htmlspecialchars($teks ?? "", ENT_QUOTES, "UTF-8");
+}
+
+function tebal($teks)
+{
+  return "<strong>" . bersihkan($teks) . "</strong>";
 }
 
 /** Menghitung sisa semester hingga batas yang ditentukan. */
@@ -86,6 +90,7 @@ function validasiFormulir(array $data): string
   }
 
   $minatDiizinkan = ['HTML', 'CSS'];
+
   if (!is_array($minat)) {
     $pesanKesalahan .= 'Format pilihan topik tidak valid. ';
   } else {
