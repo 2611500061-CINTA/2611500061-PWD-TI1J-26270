@@ -24,3 +24,4 @@
 - Kedua berkas berada di folder `pertemuan-11`.
 - `index.php` memuat `fungsi.php` dan `koneksi.php` menggunakan `require_once()` pada bagian awal.
 - `index.php` memuat `koneksi.php` sebelum koneksi digunakan. Halaman utama dapat dibuka tanpa menampilkan pesan kegagalan koneksi.
+- Halaman P11 dapat dibuka melalui localhost tanpa menampilkan pesan kegagalan koneksi.
