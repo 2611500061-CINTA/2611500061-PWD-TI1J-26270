@@ -22,3 +22,4 @@
 - Setelah pengujian, file sementara tersebut dihapus.
 - `index.php` memuat `koneksi.php` menggunakan `require_once()`.
 - Kedua berkas berada di folder `pertemuan-11`.
+- `index.php` memuat `fungsi.php` dan `koneksi.php` menggunakan `require_once()` pada bagian awal.
